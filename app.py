@@ -1,6 +1,10 @@
 from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import DeclarativeBase
 
 app = Flask(__name__)
+
+# PAGE ROUTES
 
 @app.route('/')
 def index():
@@ -21,3 +25,14 @@ def news():
 @app.route('/forum')
 def forum():
     return render_template('forum.html')
+
+# SQLAlchemy and DB setup
+
+class Base(DeclarativeBase):
+    pass
+
+db = SQLAlchemy(model_class=Base)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
+
+db.init_app(app)
