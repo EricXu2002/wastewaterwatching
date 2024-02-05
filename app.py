@@ -21,7 +21,7 @@ class Topic(db.Model):
     title: Mapped[str] = mapped_column(unique=True)
     description: Mapped[str]
 
-class Comment():
+class Comment(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     text: Mapped[str]
     topicId: Mapped[str]
@@ -53,49 +53,29 @@ def forum():
     if request.method == "POST":
         topic = Topic(
             title=request.form["title"],
-            desc=request.form["description"],
+            description=request.form["description"],
         )
         db.session.add(topic)
         db.session.commit()
         
-    return render_template('forum.html')
+    topics = db.session.execute(db.select(Topic)).scalars()
+
+    return render_template('forum/index.html', topics=topics)
 
 @app.route('/forum/topic/<int:id>', methods=["GET", "POST"])
-def topic():
-    pass
-
-"""
-@app.route("/users")
-def user_list():
-    users = db.session.execute(db.select(User).order_by(User.username)).scalars()
-    return render_template("user/list.html", users=users)
-
-@app.route("/users/create", methods=["GET", "POST"])
-def user_create():
+def topic(id):
     if request.method == "POST":
-        user = User(
-            username=request.form["username"],
-            email=request.form["email"],
+        comment = Comment(
+            text=request.form["text"],
+            topicId=id
         )
-        db.session.add(user)
+        db.session.add(comment)
         db.session.commit()
-        return redirect(url_for("user_detail", id=user.id))
+    
+    topic = db.get_or_404(Topic, id)
+    comments = Comment.query.filter_by(topicId=id).all()
+    return render_template('forum/topic.html', topic=topic, comments=comments)
 
-    return render_template("user/create.html")
 
-@app.route("/user/<int:id>")
-def user_detail(id):
-    user = db.get_or_404(User, id)
-    return render_template("user/detail.html", user=user)
-
-@app.route("/user/<int:id>/delete", methods=["GET", "POST"])
-def user_delete(id):
-    user = db.get_or_404(User, id)
-
-    if request.method == "POST":
-        db.session.delete(user)
-        db.session.commit()
-        return redirect(url_for("user_list"))
-
-    return render_template("user/delete.html", user=user)
-"""
+if __name__ == "__main__":
+    app.run(debug=True)
