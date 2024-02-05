@@ -3,4 +3,16 @@
 {% block content %}
     <h1>{% block title %} Welcome to Wastewater Watching {% endblock %}</h1>
     <p>Here is the news!</p>
+    <head>
+        <meta charset="UTF-8">
+        <title>News Headlines</title>
+    </head>
+    <body>
+        <h1>Latest News Headlines</h1>
+        <ul>
+            {% for headline in headlines %}
+            <li>{{ headline }}</li>
+            {% endfor %}
+        </ul>
+    </body>
 {% endblock %}
