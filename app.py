@@ -6,13 +6,18 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String
 
 def scrape_news():
-    url = "https://en.wikipedia.org/wiki/Fukushima_nuclear_accident#References"
+    #url = "https://en.wikipedia.org/wiki/Fukushima_nuclear_accident#References"
+    url = "https://www.independent.co.uk/topic/fukushima"
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
     headlines = []
-    for headline in soup.find_all("h3", class_="headline"):
+    links = []
+    for headline in soup.find_all(["h2", "a"], class_="title"):
         headlines.append(headline.text)
-    return headlines
+        linkElement = headline.find("a")
+        if linkElement:
+            links.append(linkElement.get("href"))
+    return headlines, links
 
 
 app = Flask(__name__)
@@ -58,8 +63,8 @@ def map():
 
 @app.route('/news')
 def news():
-    headlines = scrape_news()
-    return render_template('news.html', headlines = headlines)
+    headlines, links = scrape_news()
+    return render_template('news.html', headlines = headlines, links = links)
 
 @app.route('/forum', methods=["GET", "POST"])
 def forum():

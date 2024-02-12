@@ -11,7 +11,10 @@
         <h1>Latest News Headlines</h1>
         <ul>
             {% for headline in headlines %}
-            <li>{{ headline }}</li>
+            <li style="font-size:large"><a href="">{{ headline }}</a></li>
+            {% endfor %}
+            {% for links in links %}
+            <li></li>
             {% endfor %}
         </ul>
     </body>
