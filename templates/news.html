@@ -10,11 +10,9 @@
     <body>
         <h1>Latest News Headlines</h1>
         <ul>
-            {% for headline in headlines %}
-            <li style="font-size:large"><a href="">{{ headline }}</a></li>
-            {% endfor %}
-            {% for links in links %}
-            <li></li>
+            {% for i in range(headlines|length) %}
+                <li style="font-size:large"><a href="{{links[i]}}">{{ headlines[i] }}</a></li>
+                <hr>
             {% endfor %}
         </ul>
     </body>

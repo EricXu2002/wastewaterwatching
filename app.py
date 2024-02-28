@@ -12,11 +12,15 @@ def scrape_news():
     soup = BeautifulSoup(response.content, "html.parser")
     headlines = []
     links = []
+    print("getting headlines")
     for headline in soup.find_all(["h2", "a"], class_="title"):
         headlines.append(headline.text)
-        linkElement = headline.find("a")
-        if linkElement:
-            links.append(linkElement.get("href"))
+        links.append("https://www.independent.co.uk/"+headline.get("href"))
+        #linkElement = headline.find("a")
+        #if linkElement:
+        #    links.append(linkElement.get("href"))
+        #    print(linkElement.get("href"))
+        #    print("hi")
     return headlines, links
 
 
@@ -64,7 +68,7 @@ def map():
 @app.route('/news')
 def news():
     headlines, links = scrape_news()
-    return render_template('news.html', headlines = headlines, links = links)
+    return render_template('news.html', headlines=headlines, links=links)
 
 @app.route('/forum', methods=["GET", "POST"])
 def forum():
