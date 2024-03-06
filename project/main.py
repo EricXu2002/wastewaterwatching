@@ -1,9 +1,9 @@
+from flask import Blueprint, render_template
+from . import db
 import requests
 from bs4 import BeautifulSoup
-from flask import Flask, render_template, request
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from sqlalchemy import Integer, String
+
+main = Blueprint("main", __name__)
 
 def scrape_news():
     url = "https://en.wikipedia.org/wiki/Fukushima_nuclear_accident#References"
@@ -14,20 +14,7 @@ def scrape_news():
         headlines.append(headline.text)
     return headlines
 
-
-app = Flask(__name__)
-
-# SQLAlchemy and DB setup
-
-class Base(DeclarativeBase):
-    pass
-
-db = SQLAlchemy(model_class=Base)
-
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
-
-db.init_app(app)
-
+"""
 class Topic(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(unique=True)
@@ -42,28 +29,31 @@ class Comment(db.Model):
 with app.app_context():
     db.create_all()
 
+"""
+
+
 # PAGE ROUTES
 
-@app.route('/')
+@main.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/about')
+@main.route('/about')
 def about():
     return render_template('about.html')
 
-@app.route('/map')
+@main.route('/map')
 def map():
     return render_template('map.html')
 
-@app.route('/news')
+@main.route('/news')
 def news():
     headlines = scrape_news()
     return render_template('news.html', headlines = headlines)
 
-@app.route('/forum', methods=["GET", "POST"])
+@main.route('/forum', methods=["GET", "POST"])
 def forum():
-    if request.method == "POST":
+    """ if request.method == "POST":
         topic = Topic(
             title=request.form["title"],
             description=request.form["description"],
@@ -73,11 +63,12 @@ def forum():
         
     topics = db.session.execute(db.select(Topic)).scalars()
 
-    return render_template('forum/index.html', topics=topics)
+    return render_template('forum/index.html', topics=topics) """
+    return render_template('forum/index.html', topics=[])
 
-@app.route('/forum/topic/<int:id>', methods=["GET", "POST"])
+@main.route('/forum/topic/<int:id>', methods=["GET", "POST"])
 def topic(id):
-    if request.method == "POST":
+    """ if request.method == "POST":
         comment = Comment(
             text=request.form["text"],
             topicId=id
@@ -87,8 +78,7 @@ def topic(id):
     
     topic = db.get_or_404(Topic, id)
     comments = Comment.query.filter_by(topicId=id).all()
-    return render_template('forum/topic.html', topic=topic, comments=comments)
+    return render_template('forum/topic.html', topic=topic, comments=comments) """
+    return render_template('forum/topic.html', topic='', comments=[])
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
