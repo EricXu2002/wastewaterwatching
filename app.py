@@ -38,6 +38,12 @@ class Comment(db.Model):
     text: Mapped[str]
     topicId: Mapped[str]
 
+class User(db.Model):
+    id: Mapped[int] = mapped_column(primary_key=True)
+    email: Mapped[str] = mapped_column(unique=True)
+    password: Mapped[str]
+    name: Mapped[str]
+
 
 with app.app_context():
     db.create_all()
@@ -88,6 +94,18 @@ def topic(id):
     topic = db.get_or_404(Topic, id)
     comments = Comment.query.filter_by(topicId=id).all()
     return render_template('forum/topic.html', topic=topic, comments=comments)
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
+@app.route('/logout')
+def logout():
+    return "logout"
 
 
 if __name__ == "__main__":
