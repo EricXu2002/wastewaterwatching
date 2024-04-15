@@ -5,6 +5,19 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String
 
+def scrapeNewsForPlant(name):
+    url = "https://www.google.com/search?sca_esv=eae1723b12d3aedd&sca_upv=1&sxsrf=ACQVn09QkUKH8wY_0xE3odg95y8YGb7_LQ:1712595997604&q=" + name + "&tbm=nws&source=lnms&prmd=ivnmbtz&sa=X&ved=2ahUKEwihsdKgjbOFAxUQM1kFHahzCEYQ0pQJegQICBAB&biw=1280&bih=631&dpr=1.5"
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, "html.parser")
+    headlines=[]
+    links=[]
+    for headline in soup.find_all('h3'):
+        headlines.append(headline.text)
+        links.append(headline.get("href"))
+        print(headline.get("href"))
+    return headlines, links
+    
+
 def scrape_news():
     #url = "https://en.wikipedia.org/wiki/Fukushima_nuclear_accident#References"
     url = "https://www.independent.co.uk/topic/fukushima"
@@ -73,7 +86,10 @@ def map():
 
 @app.route('/news')
 def news():
-    headlines, links = scrape_news()
+    headlines, links = scrapeNewsForPlant("Radiation")
+    headlines2, links2 = scrape_news()
+    headlines += headlines2
+    links += links2
     return render_template('news.html', headlines=headlines, links=links)
 
 @app.route('/forum', methods=["GET", "POST"])
