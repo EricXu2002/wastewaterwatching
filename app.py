@@ -44,10 +44,12 @@ db.init_app(app)
 class Topic(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(unique=True)
+    user: Mapped[str]
     description: Mapped[str]
 
 class Comment(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
+    user: Mapped[str]
     text: Mapped[str]
     topicId: Mapped[str]
 
@@ -97,6 +99,7 @@ def forum():
         topic = Topic(
             title=request.form["title"],
             description=request.form["description"],
+            user=current_user.name
         )
         db.session.add(topic)
         db.session.commit()
@@ -111,7 +114,8 @@ def topic(id):
     if request.method == "POST":
         comment = Comment(
             text=request.form["text"],
-            topicId=id
+            topicId=id,
+            user=current_user.name
         )
         db.session.add(comment)
         db.session.commit()
@@ -122,10 +126,15 @@ def topic(id):
 
 @app.route('/login')
 def login():
+    if current_user.is_authenticated:
+        flash("You are already logged in.")
+        return redirect(url_for('index'))
+    
     return render_template('login.html')
 
 @app.route('/login', methods=["POST"])
 def login_post():
+
     #log in dude
     email = request.form.get("email")
     password = request.form.get("password")
