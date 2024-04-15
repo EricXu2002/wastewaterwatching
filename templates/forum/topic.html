@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Welcome to Wastewater Watching {% endblock %}</h1>
-
     <div class="container">
         
         
         <h2>{{topic['title']}}</h2>
         <p>{{topic['description']}}</p>
+        <p>{{topic['user']}}</p>
         <!-- <div class="my-3 p-3 bg-body rounded shadow-sm">
             <h6 class="border-bottom pb-2 mb-0">{{topic['title']}}</h6>
             <div class="d-flex text-muted pt-3">
@@ -22,6 +21,7 @@
         <h2>Comments</h2>
 
         {% for comment in comments %}
+        <p>{{comment['user']}}</p>
         <p>{{comment['text']}}</p>
         {% endfor %}
 
