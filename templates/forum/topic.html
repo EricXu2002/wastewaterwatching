@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        
+        
+        <h2>{{topic['title']}}</h2>
+        <p>{{topic['description']}}</p>
+        <p>{{topic['user']}}</p>
+        <!-- <div class="my-3 p-3 bg-body rounded shadow-sm">
+            <h6 class="border-bottom pb-2 mb-0">{{topic['title']}}</h6>
+            <div class="d-flex text-muted pt-3">
+              <p class="pb-3 mb-0 small lh-sm border-bottom">
+                <strong class="d-block text-gray-dark">{{topic['title']}}</strong>
+                {{topic['description']}}
+              </p>
+            </div>
+            
+        </div> -->
+
+        <h2>Comments</h2>
+
+        {% for comment in comments %}
+        <p>{{comment['user']}}</p>
+        <p>{{comment['text']}}</p>
+        {% endfor %}
+
+        <h2>Add a Comment</h2>
+        <form action="/forum/topic/{{topic.id}}" method="post">
+            <div class="mb-3">
+                <label for="text" class="form-label">Text</label>
+                <input type="text" name="text" class="form-control" id="text" aria-describedby="textContent">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        
+    </div>
+{% endblock %}

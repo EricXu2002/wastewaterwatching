@@ -1,6 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Welcome to Wastewater Watching {% endblock %}</h1>
-    <p>Here is the news!</p>
+    <p></p>
+    <head>
+        <meta charset="UTF-8">
+        <title>News Headlines</title>
+    </head>
+    <body>
+        <h1 style="text-align:center">Latest News Headlines</h1>
+        <hr>
+        <ul>
+            {% for i in range(headlines|length) %}
+                <h2 style="font-size:large;"><a href="{{links[i]}}">{{ headlines[i] }}</a></h2>
+                <hr>
+            {% endfor %}
+        </ul>
+    </body>
 {% endblock %}
