@@ -93,36 +93,48 @@ def news():
     return render_template('news.html', headlines=headlines, links=links)
 
 @app.route('/forum', methods=["GET", "POST"])
-@login_required
+# @login_required
 def forum():
-    if request.method == "POST":
-        topic = Topic(
-            title=request.form["title"],
-            description=request.form["description"],
-            user=current_user.name
-        )
-        db.session.add(topic)
-        db.session.commit()
-        
+
+    curr_name = 'Guest'
+
+    if current_user.is_authenticated:
+        curr_name = current_user.name
+        if request.method == "POST":
+            topic = Topic(
+                title=request.form["title"],
+                description=request.form["description"],
+                user=current_user.name
+            )
+            db.session.add(topic)
+            db.session.commit()
+            
     topics = db.session.execute(db.select(Topic)).scalars()
 
-    return render_template('forum/index.html', topics=topics, name=current_user.name)
+    return render_template('forum/index.html', topics=topics, name=curr_name)
 
 @app.route('/forum/topic/<int:id>', methods=["GET", "POST"])
-@login_required
+# @login_required
 def topic(id):
-    if request.method == "POST":
-        comment = Comment(
-            text=request.form["text"],
-            topicId=id,
-            user=current_user.name
-        )
-        db.session.add(comment)
-        db.session.commit()
+
+    curr_name = 'Guest'
+
+    if current_user.is_authenticated:
+        curr_name = current_user.name
+        if request.method == "POST":
+            comment = Comment(
+                text=request.form["text"],
+                topicId=id,
+                user=current_user.name
+            )
+            db.session.add(comment)
+            db.session.commit()
+
+    
     
     topic = db.get_or_404(Topic, id)
     comments = Comment.query.filter_by(topicId=id).all()
-    return render_template('forum/topic.html', topic=topic, comments=comments, name=current_user.name)
+    return render_template('forum/topic.html', topic=topic, comments=comments, name=curr_name)
 
 @app.route('/login')
 def login():
