@@ -33,9 +33,13 @@
             {% endfor %}
         </div>
 
-        <a href="/forum/topic/{{topic.id}}/newcomment">
-            <button type="button" class="btn btn-primary">New Comment</button>
-        </a>
+        <h5>Add a Comment</h5>
+        <form action="/forum/topic/{{topic.id}}" method="post">
+            <div class="mb-3">
+                <input type="text" name="text" class="form-control" id="text" aria-describedby="textContent">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
 
         
     </div>

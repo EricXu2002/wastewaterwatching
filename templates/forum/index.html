@@ -1,34 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Welcome {{ name }} {% endblock %}</h1>
+    <h2>{% block title %} Welcome {{ name }} {% endblock %}</h2>
 
     <div class="container">
-        <h2>Add a Topic<h2>
-        <form action="/forum" method="post">
-            <div class="mb-3">
-              <label for="title" class="form-label">Title</label>
-              <input type="text" name="title" class="form-control" id="title" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-              <label for="description" class="form-label">Description</label>
-              <input type="text" name="description" class="form-control" id="description">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
         
-        <h2>Topics</h2>
         <div class="my-3 p-3 bg-body rounded shadow-sm">
-            <h6 class="border-bottom pb-2 mb-0">Browse Topics</h6>
+            <h4 class="border-bottom pb-2 mb-0">Browse Topics</h4>
             {% for topic in topics %}
             <div class="d-flex text-muted pt-3">
-              <p class="pb-3 mb-0 small lh-sm border-bottom">
-                <strong class="d-block text-gray-dark"><a href="/forum/topic/{{topic.id}}">{{topic['title']}}</a></strong>
-                <strong>By: {{topic['user']}}</strong>
+              <p class="pb-3 mb-0 border-bottom">
+                <strong class="d-block text-gray-dark"><a href="/forum/topic/{{topic.id}}">{{topic['title']}}</a> By: {{topic['user']}}</strong>
                 {{topic['description']}}
               </p>
             </div>
             {% endfor %}
         </div>
+
+        <a href="/forum/newtopic">
+          <button type="button" class="btn btn-primary">Make a New Topic</button>
+        </a>
     </div>
 {% endblock %}
