@@ -3,10 +3,27 @@
 {% block content %}
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Welcome to Wastewater Watching</title>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCif7RLRptYuJECSW-ddD7sZE5lSghy_Gw&callback=initMap&libraries=&v=weekly" defer></script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+</head>
+
+<body>
+    <h1>Welcome to Wastewater Watching</h1>
+    <p>Here is the map!</p>
+    <div id="map"></div>
+    <div id="map" style="height: 400px;"></div>
+    <div id="newsDisplay" style="padding: 20px;">
+        <h2>News For the Nuclear Power Plant You Clicked</h2>
+    </div>
+</body>
+
+<body>
+    <div id="map"></div>
+    <div id="newsDisplay"></div>
+
     <script>
         let map;
         let markers = [];
@@ -63,227 +80,226 @@
                 //Source: https://en.wikipedia.org/wiki/List_of_nuclear_power_stations#cite_ref-tai_45-1
 
                 //in service
-                { lat: 69.7097, lng: 170.3061, description: "Akademik Lomonosov: The world's first floating nuclear power station." },
-                { lat: 36.1444444444444, lng: 33.5411111111111, description: "Akkuyu Nuclear Power Plant: Turkey's first nuclear reactor, marking significant progress in the country's energy sector." },
-                { lat: 39.8080555555556, lng: -5.69694444444445, description: "Almaraz Nuclear Power Station: A key contributor to Spain's electricity supply, located in Almaraz." },
-                { lat: -23.0083333333333, lng: -44.4738888888889, description: "Angra Nuclear Power Station: Brazil's cornerstone in nuclear power, located near Rio de Janeiro." },
-                { lat: 35.3102777777778, lng: -93.2313888888889, description: "Arkansas Nuclear One: Provides a significant portion of Arkansas' electrical generation." },
-                { lat: 41.2, lng: 0.569444444444444, description: "Ascó Nuclear Power Station: A vital part of Spain's nuclear energy sector, located in Ascó." },
-                { lat: -33.9675, lng: -59.205, description: "Atucha Nuclear Power Station: Argentina's pioneering nuclear power facility." },
-                { lat: 52.0911111111111, lng: 47.9552777777778, description: "Balakovo Nuclear Power Station: One of Russia's largest nuclear plants, playing a critical role in the national grid." },
-                { lat: 23.985, lng: 52.2836111111111, description: "Barakah Nuclear Power Plant: The UAE's first nuclear power station, signifying a major step towards energy diversification." },
-                { lat: 40.6233333333333, lng: -80.4305555555556, description: "Beaver Valley Nuclear Power Station: A key electricity source for Pennsylvania and the surrounding region." },
-                { lat: 54.7619444444444, lng: 26.12, description: "Belarusian Nuclear Power Plant: A significant project for Belarus, enhancing its energy security and independence." },
-                { lat: 47.5097222222222, lng: 2.875, description: "Belleville Nuclear Power Plant: Supplies electricity to the central part of France, located near Belleville." },
-                { lat: 56.8416666666667, lng: 61.3225, description: "Beloyarsk Nuclear Power Station: Known for its fast neutron reactor, located in Russia." },
-                { lat: 68.0502777777778, lng: 166.538611111111, description: "Nuclear facility providing significant energy output, specific details not provided." },
-                { lat: 45.2558333333333, lng: -0.693055555555556, description: "Blayais Nuclear Power Plant: Located in France, safeguards against flooding have been significantly bolstered since 1999." },
-                { lat: 48.4944444444444, lng: 17.6819444444444, description: "Bohunice Nuclear Power Plant." },
-                { lat: 51.4308333333333, lng: 3.71833333333333, description: "Borssele Nuclear Power Station." },
-                { lat: 41.2436111111111, lng: -88.2291666666667, description: "Braidwood Nuclear Power Station: Enhances the electricity supply to the Chicago metropolitan area, showcasing advanced safety features." },
-                { lat: 34.7038888888889, lng: -87.1186111111111, description: "Browns Ferry Nuclear Power Station: The first nuclear plant in the world to generate more than 1,000 megawatts of power." },
-                { lat: 44.3252777777778, lng: -81.5994444444444, description: "Bruce Nuclear Generating Station: The largest operating nuclear power plant in the world, located in Ontario, Canada." },
-                { lat: 33.9583333333333, lng: -78.0102777777778, description: "Brunswick Nuclear Generating Station: A major contributor to North Carolina's electricity, featuring two reactors." },
-                { lat: 45.8, lng: 5.27083333333333, description: "Bugey Nuclear Power Station: Plays a critical role in France's nuclear energy infrastructure, located in Bugey." },
-                { lat: 28.8297222222222, lng: 50.8861111111111, description: "Bushehr Nuclear Power Plant: Iran's first nuclear power plant, a landmark in the country's energy development." },
-                { lat: 42.0741666666667, lng: -89.2819444444444, description: "Byron Nuclear Generating Station: Provides electricity to northern Illinois and the Chicago area, featuring two units." },
-                { lat: 38.7616666666667, lng: -91.78, description: "Callaway Plant: A significant source of clean energy in Missouri, with one reactor." },
-                { lat: 38.4319444444444, lng: -76.4422222222222, description: "Calvert Cliffs Nuclear Power Station: Known for its distinctive cooling towers, serves the mid-Atlantic region of the United States." },
-                { lat: 35.0516666666667, lng: -81.07, description: "Catawba Nuclear Station: Located on Lake Wylie, South Carolina, it's vital for the region's power supply." },
-                { lat: 49.4158333333333, lng: 6.21805555555556, description: "Cattenom Nuclear Power Station: One of France's largest nuclear power plants, located near the town of Cattenom." },
-                { lat: 44.3222222222222, lng: 28.0572222222222, description: "Cernavoda Nuclear Power Station: Romania's only nuclear power provider, featuring Canadian-designed reactors." },
-                { lat: 19.4602777777778, lng: 108.9, description: "Changjiang Nuclear Power Plant: A key part of China's nuclear power expansion plan, located on Hainan Island." },
+                { lat: 69.7097, lng: 170.3061, description: "Akademik Lomonosov: The world's first floating nuclear power station.", imageName: "Akademik Lomonosov.jpg"},
+                { lat: 36.1444444444444, lng: 33.5411111111111, description: "Akkuyu Nuclear Power Plant: Turkey's first nuclear reactor, marking significant progress in the country's energy sector.", imageName: "Akkuyu.jpg" },
+                { lat: 39.8080555555556, lng: -5.69694444444445, description: "Almaraz Nuclear Power Station: A key contributor to Spain's electricity supply, located in Almaraz.", imageName: "Almaraz.jpg"},
+                { lat: -23.0083333333333, lng: -44.4738888888889, description: "Angra Nuclear Power Station: Brazil's cornerstone in nuclear power, located near Rio de Janeiro.", imageName: "Angra.jpg"},
+                { lat: 35.3102777777778, lng: -93.2313888888889, description: "Arkansas Nuclear One: Provides a significant portion of Arkansas' electrical generation.", imageName: "Arkansas Nuclear One.jpg" },
+                { lat: 41.2, lng: 0.569444444444444, description: "Ascó Nuclear Power Station: A vital part of Spain's nuclear energy sector, located in Ascó.", imageName: "Ascó.jpg" },
+                { lat: -33.9675, lng: -59.205, description: "Atucha Nuclear Power Station: Argentina's pioneering nuclear power facility.", imageName: "Atucha.jpg" },
+                { lat: 52.0911111111111, lng: 47.9552777777778, description: "Balakovo Nuclear Power Station: One of Russia's largest nuclear plants, playing a critical role in the national grid.", imageName: "Balakovo.jpg" },
+                { lat: 23.985, lng: 52.2836111111111, description: "Barakah Nuclear Power Plant: The UAE's first nuclear power station, signifying a major step towards energy diversification.", imageName: "Barakah.jpg" },
+                { lat: 40.6233333333333, lng: -80.4305555555556, description: "Beaver Valley Nuclear Power Station: A key electricity source for Pennsylvania and the surrounding region.", imageName: "Beaver Valley.jpg" },
+                { lat: 54.7619444444444, lng: 26.12, description: "Belarusian Nuclear Power Plant: A significant project for Belarus, enhancing its energy security and independence.", imageName: "Belarusian.jpg" },
+                { lat: 47.5097222222222, lng: 2.875, description: "Belleville Nuclear Power Plant: Supplies electricity to the central part of France, located near Belleville.", imageName: "Belleville.jpg" },
+                { lat: 56.8416666666667, lng: 61.3225, description: "Beloyarsk Nuclear Power Station: Known for its fast neutron reactor, located in Russia.", imageName: "Beloyarsk.jpg" },
+                { lat: 68.0502777777778, lng: 166.538611111111, description: "Bilibino Nuclear Power Plant", imageName: "Bilibino.jfif" },
+                { lat: 45.2558333333333, lng: -0.693055555555556, description: "Blayais Nuclear Power Plant: Located in France, safeguards against flooding have been significantly bolstered since 1999.", imageName: "Blayais.jpg" },
+                { lat: 48.4944444444444, lng: 17.6819444444444, description: "Bohunice Nuclear Power Plant.", imageName: "Bohunice.jpg" },
+                { lat: 51.4308333333333, lng: 3.71833333333333, description: "Borssele Nuclear Power Station.", imageName: "Borssele.jpg" },
+                { lat: 41.2436111111111, lng: -88.2291666666667, description: "Braidwood Nuclear Power Station: Enhances the electricity supply to the Chicago metropolitan area, showcasing advanced safety features.", imageName: "Braidwood.png" },
+                { lat: 34.7038888888889, lng: -87.1186111111111, description: "Browns Ferry Nuclear Power Station: The first nuclear plant in the world to generate more than 1,000 megawatts of power.", imageName: "Browns Ferry.jpg" },
+                { lat: 44.3252777777778, lng: -81.5994444444444, description: "Bruce Nuclear Generating Station: The largest operating nuclear power plant in the world, located in Ontario, Canada.", imageName: "Bruce.jpg" },
+                { lat: 33.9583333333333, lng: -78.0102777777778, description: "Brunswick Nuclear Generating Station: A major contributor to North Carolina's electricity, featuring two reactors.", imageName: "Brunswick.jpg" },
+                { lat: 45.8, lng: 5.27083333333333, description: "Bugey Nuclear Power Station: Plays a critical role in France's nuclear energy infrastructure, located in Bugey.", imageName: "Bugey.jpg" },
+                { lat: 28.8297222222222, lng: 50.8861111111111, description: "Bushehr Nuclear Power Plant: Iran's first nuclear power plant, a landmark in the country's energy development.", imageName: "Bushehr.jpg" },
+                { lat: 42.0741666666667, lng: -89.2819444444444, description: "Byron Nuclear Generating Station: Provides electricity to northern Illinois and the Chicago area, featuring two units.", imageName: "Byron.jpg" },
+                { lat: 38.7616666666667, lng: -91.78, description: "Callaway Plant: A significant source of clean energy in Missouri, with one reactor.", imageName: "Callaway.jfif" },
+                { lat: 38.4319444444444, lng: -76.4422222222222, description: "Calvert Cliffs Nuclear Power Station: Known for its distinctive cooling towers, serves the mid-Atlantic region of the United States.", imageName: "Calvert Cliffs.jpg" },
+                { lat: 35.0516666666667, lng: -81.07, description: "Catawba Nuclear Station: Located on Lake Wylie, South Carolina, it's vital for the region's power supply.", imageName: "Catawba.jpg" },
+                { lat: 49.4158333333333, lng: 6.21805555555556, description: "Cattenom Nuclear Power Station: One of France's largest nuclear power plants, located near the town of Cattenom.", imageName: "Cattenom.jpg" },
+                { lat: 44.3222222222222, lng: 28.0572222222222, description: "Cernavoda Nuclear Power Station: Romania's only nuclear power provider, featuring Canadian-designed reactors.", imageName: "Cernavoda.jpg" },
+                { lat: 19.4602777777778, lng: 108.9, description: "Changjiang Nuclear Power Plant: A key part of China's nuclear power expansion plan, located on Hainan Island.", imageName: "Changjiang.webp" },
                 { lat: 32.3902777777778, lng: 71.4625, description: "Chashma Nuclear Power Plant: A critical component of Pakistan's energy sector, featuring multiple reactors." },
-                { lat: 47.2305555555556, lng: 0.170555555555556, description: "Chinon Nuclear Power Station: Located in the Loire Valley of France, it has been operating since the 1960s." },
-                { lat: 50.09, lng: 4.78944444444444, description: "Chooz Nuclear Power Station: Nestled in the picturesque Ardennes region of France, featuring advanced pressurized water reactors." },
-                { lat: 46.4566666666667, lng: 0.652777777777778, description: "Civaux Nuclear Power Station: Utilizes cutting-edge technology for energy production, located in Civaux, France." },
-                { lat: 40.1722222222222, lng: -88.835, description: "Clinton Nuclear Generating Station: A single unit nuclear power plant significantly contributing to Illinois' electricity needs." },
-                { lat: 39.2166666666667, lng: -1.05, description: "Cofrentes Nuclear Power Station: Spain's contribution to nuclear energy, located on the banks of the Júcar River." },
-                { lat: 46.4711111111111, lng: -119.333888888889, description: "Columbia Nuclear Power Station: A key player in Washington state's energy mix, providing reliable power." },
-                { lat: 32.2983333333333, lng: -97.785, description: "Comanche Peak Nuclear Power Station: Powers much of Texas with its two reactors, a pivotal part of the state's energy infrastructure." },
-                { lat: 40.3619444444444, lng: -95.6413888888889, description: "Cooper Nuclear Station." },
-                { lat: 44.6330555555556, lng: 4.75666666666667, description: "Cruas Nuclear Power Station: France's commitment to nuclear energy, marked by its distinctive cooling towers." },
-                { lat: 47.7330555555556, lng: 2.51666666666667, description: "Dampierre Nuclear Power Plant: Provides a significant portion of the central region's electricity in France." },
-                { lat: 43.8727777777778, lng: -78.7197222222222, description: "Darlington Nuclear Power Station: A cornerstone of Ontario, Canada's energy production with plans for expansion." },
-                { lat: 41.5966666666667, lng: -83.0863888888889, description: "Davis–Besse Nuclear Power Station." },
-                { lat: 22.5977777777778, lng: 114.543611111111, description: "Daya Bay Nuclear Power Plant: A significant part of China's push towards clean energy, located near Shenzhen." },
-                { lat: 35.2108333333333, lng: -120.856111111111, description: "Diablo Canyon Power Station: The last nuclear power plant operating in California, known for its seismic design features." },
-                { lat: 51.3247222222222, lng: 4.25861111111111, description: "Doel Nuclear Power Station: Critical for Belgium's electricity supply, featuring four reactors." },
-                { lat: 41.9752777777778, lng: -86.5658333333333, description: "Donald C. Cook Nuclear Power Station: Supplies power to the Midwest, located in Michigan." },
-                { lat: 41.3897222222222, lng: -88.2680555555555, description: "Dresden Nuclear Power Plant: The first commercial nuclear power plant in the United States, located in Illinois." },
-                { lat: 49.085, lng: 16.1488888888889, description: "Dukovany Nuclear Power Station: A vital energy source for the Czech Republic, with plans for expansion." },
-                { lat: 31.9341666666667, lng: -82.3438888888889, description: "Edwin I. Hatch Nuclear Power Station: Provides a large portion of Georgia's electricity, showcasing operational excellence." },
-                { lat: -32.232, lng: -64.443, description: "Embalse Nuclear Power Station." },
-                { lat: 41.9627777777778, lng: -83.2575, description: "Enrico Fermi Nuclear Power Station: A key energy provider in Michigan, named after the renowned physicist." },
-                { lat: 21.6666666666667, lng: 108.563055555556, description: "Fangchenggang Nuclear Power Plant: Part of China's strategic move to increase its nuclear power capacity, located in Guangxi." },
-                { lat: 30.4413888888889, lng: 120.941666666667, description: "Fangjiashan Nuclear Power Plant: Complements the existing Qinshan Nuclear Power Plant in China, enhancing the regional power grid." },
-                { lat: 49.5363888888889, lng: -1.88166666666667, description: "Flamanville Nuclear Power Station: Home to France's newest reactors, showcasing advanced nuclear technology." },
-                { lat: 60.4033333333333, lng: 18.1666666666667, description: "Forsmark Nuclear Power Station: A key component of Sweden's electricity generation, with a strong focus on safety and environmental protection." },
+                { lat: 47.2305555555556, lng: 0.170555555555556, description: "Chinon Nuclear Power Station: Located in the Loire Valley of France, it has been operating since the 1960s.", imageName: "Chinon.jpg" },
+                { lat: 50.09, lng: 4.78944444444444, description: "Chooz Nuclear Power Station: Nestled in the picturesque Ardennes region of France, featuring advanced pressurized water reactors.", imageName: "Chooz.jpg" },
+                { lat: 46.4566666666667, lng: 0.652777777777778, description: "Civaux Nuclear Power Station: Utilizes cutting-edge technology for energy production, located in Civaux, France.", imageName: "Civaux.jpg" },
+                { lat: 40.1722222222222, lng: -88.835, description: "Clinton Nuclear Generating Station: A single unit nuclear power plant significantly contributing to Illinois' electricity needs.", imageName: "Clinton.jpg" },
+                { lat: 39.2166666666667, lng: -1.05, description: "Cofrentes Nuclear Power Station: Spain's contribution to nuclear energy, located on the banks of the Júcar River.", imageName: "Cofrentes.jpg" },
+                { lat: 46.4711111111111, lng: -119.333888888889, description: "Columbia Nuclear Power Station: A key player in Washington state's energy mix, providing reliable power.", imageName: "Columbia.jpg" },
+                { lat: 32.2983333333333, lng: -97.785, description: "Comanche Peak Nuclear Power Station: Powers much of Texas with its two reactors, a pivotal part of the state's energy infrastructure.", imageName: "Comanche Peak.jpg" },
+                { lat: 40.3619444444444, lng: -95.6413888888889, description: "Cooper Nuclear Station.", imageName: "Cooper.jpg" },
+                { lat: 44.6330555555556, lng: 4.75666666666667, description: "Cruas Nuclear Power Station: France's commitment to nuclear energy, marked by its distinctive cooling towers.", imageName: "Cruas.jpg" },
+                { lat: 47.7330555555556, lng: 2.51666666666667, description: "Dampierre Nuclear Power Plant: Provides a significant portion of the central region's electricity in France.", imageName: "Dampierre.jpg" },
+                { lat: 43.8727777777778, lng: -78.7197222222222, description: "Darlington Nuclear Power Station: A cornerstone of Ontario, Canada's energy production with plans for expansion.", imageName: "Darlington.jpg" },
+                { lat: 41.5966666666667, lng: -83.0863888888889, description: "Davis–Besse Nuclear Power Station.", imageName: "Davis–Besse.jpg" },
+                { lat: 22.5977777777778, lng: 114.543611111111, description: "Daya Bay Nuclear Power Plant: A significant part of China's push towards clean energy, located near Shenzhen.", imageName: "Daya Bay.jpg" },
+                { lat: 35.2108333333333, lng: -120.856111111111, description: "Diablo Canyon Power Station: The last nuclear power plant operating in California, known for its seismic design features.", imageName: "Diablo Canyon.jpg" },
+                { lat: 51.3247222222222, lng: 4.25861111111111, description: "Doel Nuclear Power Station: Critical for Belgium's electricity supply, featuring four reactors.", imageName: "Doel.jpg" },
+                { lat: 41.9752777777778, lng: -86.5658333333333, description: "Donald C. Cook Nuclear Power Station: Supplies power to the Midwest, located in Michigan.", imageName: "Donald C. Cook.jpg" },
+                { lat: 41.3897222222222, lng: -88.2680555555555, description: "Dresden Nuclear Power Plant: The first commercial nuclear power plant in the United States, located in Illinois.", imageName: "Dresden.jpg" },
+                { lat: 49.085, lng: 16.1488888888889, description: "Dukovany Nuclear Power Station: A vital energy source for the Czech Republic, with plans for expansion.", imageName: "Dukovany.jpg" },
+                { lat: 31.9341666666667, lng: -82.3438888888889, description: "Edwin I. Hatch Nuclear Power Station: Provides a large portion of Georgia's electricity, showcasing operational excellence.", imageName: "Edwin I. Hatch.jpg" },
+                { lat: -32.232, lng: -64.443, description: "Embalse Nuclear Power Station.", imageName: "Embalse.jfif" },
+                { lat: 41.9627777777778, lng: -83.2575, description: "Enrico Fermi Nuclear Power Station: A key energy provider in Michigan, named after the renowned physicist.", imageName: "Enrico Fermi US.jpg" },
+                { lat: 21.6666666666667, lng: 108.563055555556, description: "Fangchenggang Nuclear Power Plant: Part of China's strategic move to increase its nuclear power capacity, located in Guangxi.", imageName: "Fangchenggang.webp" },
+                { lat: 30.4413888888889, lng: 120.941666666667, description: "Fangjiashan Nuclear Power Plant: Complements the existing Qinshan Nuclear Power Plant in China, enhancing the regional power grid.",  },
+                { lat: 49.5363888888889, lng: -1.88166666666667, description: "Flamanville Nuclear Power Station: Home to France's newest reactors, showcasing advanced nuclear technology.", imageName: "Flamanville.png" },
+                { lat: 60.4033333333333, lng: 18.1666666666667, description: "Forsmark Nuclear Power Station: A key component of Sweden's electricity generation, with a strong focus on safety and environmental protection.", imageName: "Forsmark.jpg" },
                 { lat: 25.4441666666667, lng: 119.446111111111, description: "Fuqing Nuclear Power Plant: Part of China's ambitious plan to expand its nuclear energy capacity, located in Fujian province." },
-                { lat: 33.5155555555556, lng: 129.837222222222, description: "Genkai Nuclear Power Station: Supplies power to Japan's Kyushu region, known for its rigorous safety standards." },
-                { lat: 43.2777777777778, lng: -77.31, description: "Ginna Nuclear Power Plant, a nuclear power plant located on the southern shore of Lake Ontario, in the town of Ontario, Wayne County, New York, United States." },
-                { lat: 47.3658333333333, lng: 7.96666666666667, description: "Goesgen Nuclear Power Station: A pivotal energy source for Switzerland, utilizing pressurized water reactor technology." },
-                { lat: 44.1066666666667, lng: 0.845277777777778, description: "Golfech Nuclear Power Station: Contributes significantly to France's energy grid, located along the Garonne River." },
-                { lat: 32.0066666666667, lng: -91.0483333333333, description: "Grand Gulf Nuclear Generating Station: The largest single nuclear reactor in the United States, located in Mississippi." },
-                { lat: 51.0152777777778, lng: 2.13611111111111, description: "Gravelines Nuclear Power Station: France's largest nuclear power plant by capacity, playing a crucial role in the national energy supply." },
+                { lat: 33.5155555555556, lng: 129.837222222222, description: "Genkai Nuclear Power Station: Supplies power to Japan's Kyushu region, known for its rigorous safety standards.", imageName: "Genkai.jfif" },
+                { lat: 43.2777777777778, lng: -77.31, description: "Ginna Nuclear Power Plant, a nuclear power plant located on the southern shore of Lake Ontario, in the town of Ontario, Wayne County, New York, United States.", imageName: "Ginna.jpg" },
+                { lat: 47.3658333333333, lng: 7.96666666666667, description: "Gösgen Nuclear Power Station: A pivotal energy source for Switzerland, utilizing pressurized water reactor technology.", imageName: "Gösgen.jfif" },
+                { lat: 44.1066666666667, lng: 0.845277777777778, description: "Golfech Nuclear Power Station: Contributes significantly to France's energy grid, located along the Garonne River.", imageName: "Golfech.jpg" },
+                { lat: 32.0066666666667, lng: -91.0483333333333, description: "Grand Gulf Nuclear Generating Station: The largest single nuclear reactor in the United States, located in Mississippi.", imageName: "Grand Gulf.jpg" },
+                { lat: 51.0152777777778, lng: 2.13611111111111, description: "Gravelines Nuclear Power Station: France's largest nuclear power plant by capacity, playing a crucial role in the national energy supply.", imageName: "Gravelines.jpg" },
                 { lat: 36.7091666666667, lng: 121.381666666667, description: "Haiyang Nuclear Power Plant: A modern plant in China's Shandong province, featuring AP1000 reactors for enhanced safety." },
-                { lat: 34.6236111111111, lng: 138.1425, description: "Hamaoka Nuclear Power Station: Located in a seismic zone in Japan, it has comprehensive tsunami and earthquake safety measures." },
-                { lat: 35.415, lng: 126.423888888889, description: "Hanbit Nuclear Power Plant: Plays a significant role in South Korea's energy landscape, located in Yeonggwang County." },
-                { lat: 37.0927777777778, lng: 129.383611111111, description: "Hanul Nuclear Power Plant: Another key player in South Korea's commitment to nuclear energy, situated in Uljin County." },
-                { lat: 54.635, lng: -1.18083333333333, description: "Hartlepool Nuclear Power Station: Supplies electricity to the UK, featuring two advanced gas-cooled reactors." },
-                { lat: 34.4027777777778, lng: -80.1583333333333, description: "H. B. Robinson Nuclear Generating Station" },
-                { lat: 54.0288888888889, lng: -2.91611111111111, description: "Heysham Nuclear Power Station: Consists of two nuclear power plants, Heysham 1 and Heysham 2, providing critical power to the UK." },
-                { lat: 41.1880555555556, lng: 141.390277777778, description: "Higashidōri Nuclear Power Station: Located in Aomori Prefecture, Japan, it's part of the country's diverse energy mix." },
+                { lat: 34.6236111111111, lng: 138.1425, description: "Hamaoka Nuclear Power Station: Located in a seismic zone in Japan, it has comprehensive tsunami and earthquake safety measures.", imageName: "Hamaoka.jpg" },
+                { lat: 35.415, lng: 126.423888888889, description: "Hanbit Nuclear Power Plant: Plays a significant role in South Korea's energy landscape, located in Yeonggwang County.", imageName: "Hanbit.jpg" },
+                { lat: 37.0927777777778, lng: 129.383611111111, description: "Hanul Nuclear Power Plant: Another key player in South Korea's commitment to nuclear energy, situated in Uljin County.", imageName: "Hanul.jpg" },
+                { lat: 54.635, lng: -1.18083333333333, description: "Hartlepool Nuclear Power Station: Supplies electricity to the UK, featuring two advanced gas-cooled reactors.", imageName: "Hartlepool.jpg" },
+                { lat: 34.4027777777778, lng: -80.1583333333333, description: "H. B. Robinson Nuclear Generating Station", imageName: "H. B. Robinson.jpg" },
+                { lat: 54.0288888888889, lng: -2.91611111111111, description: "Heysham Nuclear Power Station: Consists of two nuclear power plants, Heysham 1 and Heysham 2, providing critical power to the UK.", imageName: "Heysham.jpg" },
+                { lat: 41.1880555555556, lng: 141.390277777778, description: "Higashidōri Nuclear Power Station: Located in Aomori Prefecture, Japan, it's part of the country's diverse energy mix.", imageName: "Higashidōri.jpg" },
                 { lat: 39.7977777777778, lng: 121.471944444444, description: "Hongyanhe Nuclear Power Plant: A significant contribution to China's nuclear power generation, located in Liaoning province." },
-                { lat: 39.4677777777778, lng: -75.5380555555556, description: "Hope Creek Nuclear Power Station: Sits alongside the Salem Nuclear Power Plant in New Jersey, contributing to the region's energy needs." },
-                { lat: 33.4908333333333, lng: 132.311388888889, description: "Ikata Nuclear Power Plant" },
-                { lat: 43.5233333333333, lng: -76.3983333333333, description: "James A. FitzPatrick Nuclear Power Plant" },
-                { lat: 31.2230555555556, lng: -85.1116666666667, description: "Joseph M. Farley Nuclear Power Station: Provides a significant portion of Alabama's electricity, emphasizing safety and efficiency." },
-                { lat: 57.9055555555556, lng: 35.0602777777778, description: "Kalinin Nuclear Power Station: A major Russian nuclear power plant, located in Tver Oblast." },
-                { lat: 14.8652777777778, lng: 74.4394444444444, description: "Kaiga Atomic Power Station" },
-                { lat: 21.2386111111111, lng: 73.35, description: "Kakrapar Atomic Power Station: A key element of India's nuclear energy program, located in Gujarat." },
+                { lat: 39.4677777777778, lng: -75.5380555555556, description: "Hope Creek Nuclear Power Station: Sits alongside the Salem Nuclear Power Plant in New Jersey, contributing to the region's energy needs.", imageName: "Hope Creek.jpg" },
+                { lat: 33.4908333333333, lng: 132.311388888889, description: "Ikata Nuclear Power Plant", imageName: "Ikata.jfif" },
+                { lat: 43.5233333333333, lng: -76.3983333333333, description: "James A. FitzPatrick Nuclear Power Plant", imageName: "James A. FitzPatrick.jpg" },
+                { lat: 31.2230555555556, lng: -85.1116666666667, description: "Joseph M. Farley Nuclear Power Station: Provides a significant portion of Alabama's electricity, emphasizing safety and efficiency.", imageName: "Joseph M. Farley.jpg" },
+                { lat: 57.9055555555556, lng: 35.0602777777778, description: "Kalinin Nuclear Power Station: A major Russian nuclear power plant, located in Tver Oblast.", imageName: "Kalinin.jpg" },
+                { lat: 14.8652777777778, lng: 74.4394444444444, description: "Kaiga Atomic Power Station", imageName: "Kaiga.jpg" },
+                { lat: 21.2386111111111, lng: 73.35, description: "Kakrapar Atomic Power Station: A key element of India's nuclear energy program, located in Gujarat.", imageName: "Kakrapar.jpg" },
                 { lat: 24.8471666666667, lng: 66.78825, description: "Karachi Nuclear Power Complex: Plays a crucial role in Pakistan's energy sector, located near Karachi." },
-                { lat: 37.4291666666667, lng: 138.595277777778, description: "Kashiwazaki-Kariwa Nuclear Power Plant: The world's largest nuclear power plant by electrical output, located in Japan." },
-                { lat: 50.3013888888889, lng: 26.6497222222222, description: "Khmelnytskyi Nuclear Power Plant: A major contributor to Ukraine's nuclear power generation, located in Khmelnytskyi Oblast." },
-                { lat: -33.6763888888889, lng: 18.4319444444444, description: "Koeberg Nuclear Power Station: The only nuclear power station in Africa, located near Cape Town, South Africa." },
-                { lat: 67.4666666666667, lng: 32.4666666666667, description: "Kola Nuclear Power Station: Situated in the Murmansk Oblast of Russia, it is critical to the region's energy supply." },
-                { lat: 35.3169444444444, lng: 129.3, description: "Kori Nuclear Power Station: South Korea's first nuclear power plant, an essential part of its energy strategy." },
-                { lat: 43.7461111111111, lng: 23.7705555555556, description: "Kozloduy Nuclear Power Station: Bulgaria's primary source of nuclear energy, located on the Danube River." },
-                { lat: 45.9383333333333, lng: 15.5155555555556, description: "Krško Nuclear Power Plant" },
-                { lat: 8.16833333333333, lng: 77.7125, description: "Koodankulam Nuclear Power Plant: A cornerstone of India's nuclear energy expansion, located in Tamil Nadu." },
-                { lat: 51.675, lng: 35.6055555555556, description: "Kursk Nuclear Power Station: Known for its RBMK reactors, similar to those at Chernobyl, located in Russia." },
-                { lat: 19.7208333333333, lng: -96.4063888888889, description: "Laguna Verde Nuclear Power Station: Mexico's only nuclear power plant, contributing significantly to its clean energy output." },
-                { lat: 41.2455555555556, lng: -88.6691666666667, description: "LaSalle County Nuclear Generating Station: A key power producer in Illinois, featuring two reactors." },
-                { lat: 47.6030555555556, lng: 8.18472222222222, description: "Leibstadt Nuclear Power Station: Switzerland's highest-capacity nuclear reactor, located in Leibstadt." },
-                { lat: 59.8472222222222, lng: 29.0436111111111, description: "Leningrad Nuclear Power Station: A vital energy provider for the Saint Petersburg area in Russia." },
-                { lat: 59.8305555555556, lng: 29.0572222222222, description: "Leningrad Nuclear Power Plant II: The newer facility aimed at replacing the older units, ensuring continued energy supply." },
-                { lat: 40.2266666666667, lng: -75.5872222222222, description: "Limerick Nuclear Power Plant: Supplies electricity to the Philadelphia region, noted for its economic efficiency." },
+                { lat: 37.4291666666667, lng: 138.595277777778, description: "Kashiwazaki-Kariwa Nuclear Power Plant: The world's largest nuclear power plant by electrical output, located in Japan.", imageName: "Kashiwazaki-Kariwa.jpg" },
+                { lat: 50.3013888888889, lng: 26.6497222222222, description: "Khmelnytskyi Nuclear Power Plant: A major contributor to Ukraine's nuclear power generation, located in Khmelnytskyi Oblast.", imageName: "Khmelnytskyi.jpg" },
+                { lat: -33.6763888888889, lng: 18.4319444444444, description: "Koeberg Nuclear Power Station: The only nuclear power station in Africa, located near Cape Town, South Africa.", imageName: "Koeberg.jpg" },
+                { lat: 67.4666666666667, lng: 32.4666666666667, description: "Kola Nuclear Power Station: Situated in the Murmansk Oblast of Russia, it is critical to the region's energy supply.", imageName: "Kola.jpg" },
+                { lat: 35.3169444444444, lng: 129.3, description: "Kori Nuclear Power Station: South Korea's first nuclear power plant, an essential part of its energy strategy.", imageName: "Kori.jpg" },
+                { lat: 43.7461111111111, lng: 23.7705555555556, description: "Kozloduy Nuclear Power Station: Bulgaria's primary source of nuclear energy, located on the Danube River.", imageName: "Kozloduy.jpeg" },
+                { lat: 45.9383333333333, lng: 15.5155555555556, description: "Krško Nuclear Power Plant", imageName: "Krško.jpg" },
+                { lat: 8.16833333333333, lng: 77.7125, description: "Kudankulam Nuclear Power Plant: A cornerstone of India's nuclear energy expansion, located in Tamil Nadu.", imageName: "Kudankulam.jpg" },
+                { lat: 51.675, lng: 35.6055555555556, description: "Kursk Nuclear Power Station: Known for its RBMK reactors, similar to those at Chernobyl, located in Russia.", imageName: "Kursk.jpg" },
+                { lat: 19.7208333333333, lng: -96.4063888888889, description: "Laguna Verde Nuclear Power Station: Mexico's only nuclear power plant, contributing significantly to its clean energy output.", imageName: "Laguna Verde.jpg" },
+                { lat: 41.2455555555556, lng: -88.6691666666667, description: "LaSalle County Nuclear Generating Station: A key power producer in Illinois, featuring two reactors.", imageName: "LaSalle.jpg" },
+                { lat: 47.6030555555556, lng: 8.18472222222222, description: "Leibstadt Nuclear Power Station: Switzerland's highest-capacity nuclear reactor, located in Leibstadt.", imageName: "Leibstadt.jpg" },
+                { lat: 59.8472222222222, lng: 29.0436111111111, description: "Leningrad Nuclear Power Station: A vital energy provider for the Saint Petersburg area in Russia.", imageName: "Leningrad.jpg" },
+                { lat: 59.8305555555556, lng: 29.0572222222222, description: "Leningrad Nuclear Power Plant II: The newer facility aimed at replacing the older units, ensuring continued energy supply."},
+                { lat: 40.2266666666667, lng: -75.5872222222222, description: "Limerick Nuclear Power Plant: Supplies electricity to the Philadelphia region, noted for its economic efficiency.", imageName: "Limerick.jpg" },
                 { lat: 22.6047222222222, lng: 114.551388888889, description: "Ling Ao Nuclear Power Plant: Part of China's significant investment in nuclear power, located in Guangdong province." },
-                { lat: 60.3722222222222, lng: 26.3472222222222, description: "Loviisa Nuclear Power Station: Finland's commitment to nuclear energy, with a focus on safety and efficiency." },
-                { lat: 35.4325, lng: -80.9483333333333, description: "McGuire Nuclear Station: A vital energy source for North Carolina, featuring two units." },
-                { lat: 21.9580555555556, lng: 120.751666666667, description: "Maanshan Nuclear Power Plant: Taiwan's contribution to nuclear power, providing a significant portion of the island's electricity needs." },
-                { lat: 12.5575, lng: 80.175, description: "Madras Atomic Power Station" },
-                { lat: 40.1808333333333, lng: 44.1488888888889, description: "Armenian Nuclear Power Plant" },
-                { lat: 35.7033333333333, lng: 135.963333333333, description: "Mihama Nuclear Power Plant" },
-                { lat: 41.3119444444444, lng: -72.1686111111111, description: "Millstone Nuclear Power Station: A cornerstone of Connecticut's energy infrastructure, known for its environmental stewardship." },
-                { lat: 45.3336111111111, lng: -93.8491666666667, description: "Monticello Nuclear Generating Plant: Provides Minnesota with low-cost, carbon-free electricity, highlighting safety and community involvement." },
-                { lat: 48.2638888888889, lng: 18.4569444444444, description: "Mochovce Nuclear Power Plant" },
-                { lat: 28.1580555555556, lng: 78.4094444444444, description: "Narora Atomic Power Station" },
-                { lat: 43.5208333333333, lng: -76.4069444444444, description: "Nine Mile Point Nuclear Power Station: An important part of New York's energy mix, located near Oswego." },
+                { lat: 60.3722222222222, lng: 26.3472222222222, description: "Loviisa Nuclear Power Station: Finland's commitment to nuclear energy, with a focus on safety and efficiency.", imageName: "Loviisa.png" },
+                { lat: 35.4325, lng: -80.9483333333333, description: "McGuire Nuclear Station: A vital energy source for North Carolina, featuring two units.", imageName: "McGuire.jpg" },
+                { lat: 21.9580555555556, lng: 120.751666666667, description: "Maanshan Nuclear Power Plant: Taiwan's contribution to nuclear power, providing a significant portion of the island's electricity needs.", imageName: "Maanshan.jpg" },
+                { lat: 12.5575, lng: 80.175, description: "Madras Atomic Power Station", imageName: "Madras.jpg" },
+                { lat: 40.1808333333333, lng: 44.1488888888889, description: "Metsamor Nuclear Power Plant: the only nuclear power plant in the South Caucasus, located 36 kilometers west of Yerevan in Armenia.", imageName: "Metsamor.jpg" },
+                { lat: 35.7033333333333, lng: 135.963333333333, description: "Mihama Nuclear Power Plant", imageName: "Mihama.jpg" },
+                { lat: 41.3119444444444, lng: -72.1686111111111, description: "Millstone Nuclear Power Station: A cornerstone of Connecticut's energy infrastructure, known for its environmental stewardship.", imageName: "Millstone.jpg" },
+                { lat: 45.3336111111111, lng: -93.8491666666667, description: "Monticello Nuclear Generating Plant: Provides Minnesota with low-cost, carbon-free electricity, highlighting safety and community involvement.", imageName: "Monticello.jpg" },
+                { lat: 48.2638888888889, lng: 18.4569444444444, description: "Mochovce Nuclear Power Plant", imageName: "Mochovce.jpg" },
+                { lat: 28.1580555555556, lng: 78.4094444444444, description: "Narora Atomic Power Station", imageName: "Narora.jpg" },
+                { lat: 43.5208333333333, lng: -76.4069444444444, description: "Nine Mile Point Nuclear Power Station: An important part of New York's energy mix, located near Oswego.", imageName: "Nine Mile Point.jpg" },
                 { lat: 27.0461111111111, lng: 120.288333333333, description: "Ningde Nuclear Power Plant: Enhances China's energy security with its advanced reactors, situated in Fujian province." },
-                { lat: 48.5152777777778, lng: 3.51777777777778, description: "Nogent Nuclear Power Station: Powers a significant portion of the Paris region, known for its efficiency and reliability." },
-                { lat: 38.0605555555556, lng: -77.7894444444444, description: "North Anna Nuclear Power Station: A critical energy provider in Virginia, designed to withstand seismic events." },
-                { lat: 51.275, lng: 39.2, description: "Novovoronezh Nuclear Power Station: A pioneer in Russian nuclear technology, leading in safety and innovation." },
-                { lat: 34.7938888888889, lng: -82.8980555555556, description: "Oconee Nuclear Power Station: One of the largest nuclear power plants in the United States, located in South Carolina." },
-                { lat: 35.5405555555556, lng: 135.651944444444, description: "Ōi Nuclear Power Station: Plays a key role in Japan's Kansai region's energy supply, notable for its return to operation post-Fukushima." },
-                { lat: 61.2369444444444, lng: 21.4408333333333, description: "Olkiluoto Nuclear Power Station: Home to Finland's first EPR reactor, marking a significant advancement in nuclear technology." },
-                { lat: 38.4011111111111, lng: 141.499722222222, description: "Onagawa Nuclear Power Station: Demonstrated remarkable resilience during the 2011 Tohoku earthquake and tsunami, located in Miyagi Prefecture, Japan." },
-                { lat: 57.4155555555556, lng: 16.6711111111111, description: "Oskarshamn Nuclear Power Station: An essential part of Sweden's nuclear energy portfolio, known for its high safety standards." },
-                { lat: 46.5725, lng: 18.8541666666667, description: "Paks Nuclear Power Station: Hungary's sole nuclear power source, providing about half of the country's electricity." },
-                { lat: 33.3891666666667, lng: -112.865, description: "Palo Verde Nuclear Power Station: The largest nuclear power plant in the U.S. by net generation, playing a critical role in Arizona's energy supply." },
-                { lat: 49.8580555555556, lng: 0.635555555555556, description: "Paluel Nuclear Power Plant: A key component of France's nuclear fleet, located in Normandy." },
-                { lat: 49.9766666666667, lng: 1.21194444444444, description: "Penly Nuclear Power Station: Features advanced safety systems, contributing significantly to the northern French electricity grid." },
-                { lat: 39.7583333333333, lng: -76.2680555555555, description: "Peach Bottom Nuclear Generating Station: Known for its high efficiency and reliability, it supplies power to Pennsylvania and the surrounding states." },
-                { lat: 41.8008333333333, lng: -81.1433333333333, description: "Perry Nuclear Power Station: Ohio's first nuclear power plant, contributing significantly to the state's energy independence." },
-                { lat: 43.8116666666667, lng: -79.0658333333333, description: "Pickering Nuclear Generating Station: A major source of power for Ontario, Canada, with plans for decommissioning in the near future." },
-                { lat: 44.2811111111111, lng: -87.5366666666667, description: "Point Beach Nuclear Plant: Provides a clean, reliable source of power to Wisconsin, showcasing a strong safety record." },
-                { lat: 45.0688888888889, lng: -66.4547222222222, description: "Point Lepreau Nuclear Generating Station." },
-                { lat: 44.6216666666667, lng: -92.6330555555555, description: "Prairie Island Nuclear Power Station: Situated near the Mississippi River in Minnesota, it plays a critical role in the region's energy mix." },
-                { lat: 30.4355555555556, lng: 120.956388888889, description: "Qinshan Nuclear Power Station: China's first domestically designed and built nuclear power plant, marking a milestone in the country's nuclear energy development." },
-                { lat: 41.7263888888889, lng: -90.31, description: "Quad Cities Nuclear Power Station: A key electricity provider in Illinois and Iowa, known for its environmental stewardship programs." },
+                { lat: 48.5152777777778, lng: 3.51777777777778, description: "Nogent Nuclear Power Station: Powers a significant portion of the Paris region, known for its efficiency and reliability.", imageName: "Nogent.jpeg" },
+                { lat: 38.0605555555556, lng: -77.7894444444444, description: "North Anna Nuclear Power Station: A critical energy provider in Virginia, designed to withstand seismic events.", imageName: "North Anna.jpg" },
+                { lat: 51.275, lng: 39.2, description: "Novovoronezh Nuclear Power Station: A pioneer in Russian nuclear technology, leading in safety and innovation.", imageName: "Novovoronezh.jpg" },
+                { lat: 34.7938888888889, lng: -82.8980555555556, description: "Oconee Nuclear Power Station: One of the largest nuclear power plants in the United States, located in South Carolina.", imageName: "Oconee.jpg" },
+                { lat: 35.5405555555556, lng: 135.651944444444, description: "Ōi Nuclear Power Station: Plays a key role in Japan's Kansai region's energy supply, notable for its return to operation post-Fukushima.", imageName: "Ōi.jpg" },
+                { lat: 61.2369444444444, lng: 21.4408333333333, description: "Olkiluoto Nuclear Power Station: Home to Finland's first EPR reactor, marking a significant advancement in nuclear technology.", imageName: "Olkiluoto.jpg" },
+                { lat: 38.4011111111111, lng: 141.499722222222, description: "Onagawa Nuclear Power Station: Demonstrated remarkable resilience during the 2011 Tohoku earthquake and tsunami, located in Miyagi Prefecture, Japan.", imageName: "Onagawa.jpg" },
+                { lat: 57.4155555555556, lng: 16.6711111111111, description: "Oskarshamn Nuclear Power Station: An essential part of Sweden's nuclear energy portfolio, known for its high safety standards.", imageName: "Oskarshamn.jpg" },
+                { lat: 46.5725, lng: 18.8541666666667, description: "Paks Nuclear Power Station: Hungary's sole nuclear power source, providing about half of the country's electricity.", imageName: "Paks.jfif" },
+                { lat: 33.3891666666667, lng: -112.865, description: "Palo Verde Nuclear Power Station: The largest nuclear power plant in the U.S. by net generation, playing a critical role in Arizona's energy supply.", imageName: "Palo Verde.jpg" },
+                { lat: 49.8580555555556, lng: 0.635555555555556, description: "Paluel Nuclear Power Plant: A key component of France's nuclear fleet, located in Normandy.", imageName: "Paluel.jpg" },
+                { lat: 49.9766666666667, lng: 1.21194444444444, description: "Penly Nuclear Power Station: Features advanced safety systems, contributing significantly to the northern French electricity grid.", imageName: "Penly.jpg" },
+                { lat: 39.7583333333333, lng: -76.2680555555555, description: "Peach Bottom Nuclear Generating Station: Known for its high efficiency and reliability, it supplies power to Pennsylvania and the surrounding states.", imageName: "Peach Bottom.jpg" },
+                { lat: 41.8008333333333, lng: -81.1433333333333, description: "Perry Nuclear Power Station: Ohio's first nuclear power plant, contributing significantly to the state's energy independence.", imageName: "Perry.jpg" },
+                { lat: 43.8116666666667, lng: -79.0658333333333, description: "Pickering Nuclear Generating Station: A major source of power for Ontario, Canada, with plans for decommissioning in the near future.", imageName: "Pickering.jpg" },
+                { lat: 44.2811111111111, lng: -87.5366666666667, description: "Point Beach Nuclear Plant: Provides a clean, reliable source of power to Wisconsin, showcasing a strong safety record.", imageName: "Point Beach.jpg" },
+                { lat: 45.0688888888889, lng: -66.4547222222222, description: "Point Lepreau Nuclear Generating Station.", imageName: "Point Lepreau.jpg" },
+                { lat: 44.6216666666667, lng: -92.6330555555555, description: "Prairie Island Nuclear Power Station: Situated near the Mississippi River in Minnesota, it plays a critical role in the region's energy mix.", imageName: "Prairie Island.jpg" },
+                { lat: 30.4355555555556, lng: 120.956388888889, description: "Qinshan Nuclear Power Station: China's first domestically designed and built nuclear power plant, marking a milestone in the country's nuclear energy development.", imageName: "Qinshan.jpg" },
+                { lat: 41.7263888888889, lng: -90.31, description: "Quad Cities Nuclear Power Station: A key electricity provider in Illinois and Iowa, known for its environmental stewardship programs.", imageName: "Quad Cities.jpg" },
                 { lat: 24.8722222222222, lng: 75.6138888888889, description: "Rajasthan Atomic Power Station: A foundation of India's nuclear energy program, located in Rawatbhata." },
-                { lat: 57.2597222222222, lng: 12.1108333333333, description: "Ringhals Nuclear Power Station: Sweden's largest nuclear power plant by output, contributing significantly to the national grid." },
-                { lat: 30.7566666666667, lng: -91.3333333333333, description: "River Bend Nuclear Generating Station" },
-                { lat: 51.3277777777778, lng: 25.8916666666667, description: "Rivne Nuclear Power Station: An important part of Ukraine's energy sector, located in the northwest of the country." },
-                { lat: 47.5994444444444, lng: 42.3719444444444, description: "Rostov Nuclear Power Plant: A modern and expanding nuclear power facility in Russia, crucial for the southern region's power supply." },
-                { lat: 45.4044444444444, lng: 4.75444444444444, description: "Saint-Alban Nuclear Power Station: Demonstrates France's commitment to nuclear energy, featuring advanced technology for increased safety." },
-                { lat: 47.72, lng: 1.5775, description: "Saint-Laurent Nuclear Power Station: One of France's older nuclear sites, showcasing a long history of contributing to the national energy mix." },
-                { lat: 27.3486111111111, lng: -80.2463888888889, description: "Saint Lucie Nuclear Power Station: Plays a crucial role in Florida's energy landscape, with two reactors providing power to the state." },
-                { lat: 39.4627777777778, lng: -75.5355555555555, description: "Salem Nuclear Power Station: Located alongside the Hope Creek Nuclear Power Plant in New Jersey, it is a significant part of the region's electricity generation." },
-                { lat: 29.1011111111111, lng: 121.639722222222, description: "Sanmen Nuclear Power Plant: Hosts the world's first operational AP1000 reactors, marking a new era in nuclear safety and efficiency." },
-                { lat: 42.8988888888889, lng: -70.8508333333333, description: "Seabrook Station Nuclear Power Station: New Hampshire's sole nuclear power plant, known for its significant contribution to the New England power grid." },
-                { lat: 31.8336111111111, lng: 130.189722222222, description: "Sendai Nuclear Power Station: A vital component of Japan's energy policy, located in Kagoshima Prefecture." },
-                { lat: 35.2263888888889, lng: -85.0916666666667, description: "Sequoyah Nuclear Power Station: Supplies a large portion of Tennessee's electricity, emphasizing safety and community involvement." },
-                { lat: 35.6333333333333, lng: -78.955, description: "Shearon Harris Nuclear Power Plant" },
+                { lat: 57.2597222222222, lng: 12.1108333333333, description: "Ringhals Nuclear Power Station: Sweden's largest nuclear power plant by output, contributing significantly to the national grid.", imageName: "Ringhals.jfif" },
+                { lat: 30.7566666666667, lng: -91.3333333333333, description: "River Bend Nuclear Generating Station", imageName: "River Bend.jpg" },
+                { lat: 51.3277777777778, lng: 25.8916666666667, description: "Rivne Nuclear Power Station: An important part of Ukraine's energy sector, located in the northwest of the country.", imageName: "Rivne.jfif" },
+                { lat: 47.5994444444444, lng: 42.3719444444444, description: "Rostov Nuclear Power Plant: A modern and expanding nuclear power facility in Russia, crucial for the southern region's power supply.", imageName: "Rostov.jpg" },
+                { lat: 45.4044444444444, lng: 4.75444444444444, description: "Saint-Alban Nuclear Power Station: Demonstrates France's commitment to nuclear energy, featuring advanced technology for increased safety.", imageName: "Saint-Alban.jpg" },
+                { lat: 47.72, lng: 1.5775, description: "Saint-Laurent Nuclear Power Station: One of France's older nuclear sites, showcasing a long history of contributing to the national energy mix.", imageName: "Saint-Laurent.jpg" },
+                { lat: 27.3486111111111, lng: -80.2463888888889, description: "Saint Lucie Nuclear Power Station: Plays a crucial role in Florida's energy landscape, with two reactors providing power to the state.", imageName: "Saint Lucie.jpg" },
+                { lat: 39.4627777777778, lng: -75.5355555555555, description: "Salem Nuclear Power Station: Located alongside the Hope Creek Nuclear Power Plant in New Jersey, it is a significant part of the region's electricity generation.", imageName: "Salem.jpg" },
+                { lat: 29.1011111111111, lng: 121.639722222222, description: "Sanmen Nuclear Power Plant: Hosts the world's first operational AP1000 reactors, marking a new era in nuclear safety and efficiency.", imageName: "Sanmen.jpg" },
+                { lat: 42.8988888888889, lng: -70.8508333333333, description: "Seabrook Station Nuclear Power Station: New Hampshire's sole nuclear power plant, known for its significant contribution to the New England power grid.", imageName: "Seabrook.jpg" },
+                { lat: 31.8336111111111, lng: 130.189722222222, description: "Sendai Nuclear Power Station: A vital component of Japan's energy policy, located in Kagoshima Prefecture.", imageName: "Sendai.jpg" },
+                { lat: 35.2263888888889, lng: -85.0916666666667, description: "Sequoyah Nuclear Power Station: Supplies a large portion of Tennessee's electricity, emphasizing safety and community involvement.", imageName: "Sequoyah.jpg" },
+                { lat: 35.6333333333333, lng: -78.955, description: "Shearon Harris Nuclear Power Plant", imageName: "Shearon Harris.jpg" },
                 { lat: 36.9722222222222, lng: 122.528888888889, description: "Shidao Bay Nuclear Power Plant" },
-                { lat: 37.0611111111111, lng: 136.726388888889, description: "Shika Nuclear Power Station: Features advanced boiling water reactors, contributing to Japan's energy diversity." },
-                { lat: 35.5383333333333, lng: 132.999166666667, description: "Shimane Nuclear Power Station: Located in Shimane Prefecture, Japan, it's known for its commitment to safety and environmental protection." },
-                { lat: 52.2133333333333, lng: 1.61861111111111, description: "Sizewell-B Nuclear Power Station: The UK's only commercial pressurized water reactor, providing a significant part of the country's clean energy." },
-                { lat: 54.1691666666667, lng: 33.2466666666667, description: "Smolensk Nuclear Power Station: Utilizes RBMK reactors, similar to those at Chernobyl, located in Russia." },
-                { lat: 28.7955555555556, lng: -96.0488888888889, description: "South Texas Nuclear Power Station: A key part of Texas' energy mix, located near Bay City, featuring two reactors." },
-                { lat: 47.8166666666667, lng: 31.2166666666667, description: "South Ukraine Nuclear Power Station: An essential provider of Ukraine's electricity, demonstrating advanced nuclear technology." },
-                { lat: 37.1655555555556, lng: -76.6977777777778, description: "Surry Nuclear Power Station: Supplies power to large parts of Virginia, known for its safety record and environmental initiatives." },
-                { lat: 41.0888888888889, lng: -76.1488888888889, description: "Susquehanna Nuclear Power Station: Provides reliable, low-cost electricity to Pennsylvania, emphasizing community and environmental stewardship." },
-                { lat: 21.9094444444444, lng: 112.979166666667, description: "Taishan Nuclear Power Plant: Features EPR reactors, representing a significant advancement in global nuclear safety standards." },
-                { lat: 35.5222222222222, lng: 135.504722222222, description: "Takahama Nuclear Power Station: A key player in Japan's energy sector, located in Fukui Prefecture, with a focus on cutting-edge safety features." },
-                { lat: 19.8277777777778, lng: 72.6611111111111, description: "Tarapur Nuclear Power Station: India's first nuclear reactor and a pioneer in the country's nuclear energy development." },
-                { lat: 49.18, lng: 14.3761111111111, description: "Temelin Nuclear Power Station: A major source of electricity in the Czech Republic, noted for its two VVER reactors." },
-                { lat: 34.6869444444444, lng: 119.459722222222, description: "Tianwan Nuclear Power Station: Part of China's large-scale expansion of nuclear power, located in Jiangsu province." },
-                { lat: 50.5347222222222, lng: 5.2725, description: "Tihange Nuclear Power Station: Critical for Belgium's electricity supply, it's known for its rigorous safety protocols." },
-                { lat: 36.4663888888889, lng: 140.606666666667, description: "Tokai Nuclear Power Station: Japan's first commercial nuclear power plant, marking a significant step in the country's energy history." },
-                { lat: 43.0361111111111, lng: 140.5125, description: "Tomari Nuclear Power Station: Located in Hokkaido, Japan, it contributes significantly to the region's energy stability." },
-                { lat: 55.9680555555556, lng: -2.40916666666667, description: "Torness Nuclear Power Station: Supplies electricity to Scotland, showcasing advanced gas-cooled reactor technology." },
-                { lat: 44.3297222222222, lng: 4.73222222222222, description: "Tricastin Nuclear Power Station: A key part of France's nuclear energy sector, located in Drôme and Vaucluse." },
-                { lat: 40.7011111111111, lng: -2.62194444444444, description: "Trillo Nuclear Power Station: Provides power to Spain, emphasizing safety and environmental sustainability." },
-                { lat: 35.6727777777778, lng: 136.077222222222, description: "Tsuruga Nuclear Power Station: Known for its history and contribution to Japan's energy sector, located in Fukui Prefecture." },
-                { lat: 25.4341666666667, lng: -80.3305555555555, description: "Turkey Point Nuclear Generating Station: Situated near Miami, Florida, this plant plays a crucial role in powering the southeastern United States." },
-                { lat: 40.9513888888889, lng: 0.866666666666667, description: "Vandellos Nuclear Power Station: A significant part of Spain's nuclear energy production, located in Catalonia." },
-                { lat: 34.2986111111111, lng: -81.3147222222222, description: "Virgil C. Summer Nuclear Generating Station" },
-                { lat: 33.1430555555556, lng: -81.7658333333333, description: "Vogtle Nuclear Power Station: Embodies the future of nuclear power in the United States, with new reactors under construction in Georgia." },
+                { lat: 37.0611111111111, lng: 136.726388888889, description: "Shika Nuclear Power Station: Features advanced boiling water reactors, contributing to Japan's energy diversity.", imageName: "Shika.jpg" },
+                { lat: 35.5383333333333, lng: 132.999166666667, description: "Shimane Nuclear Power Station: Located in Shimane Prefecture, Japan, it's known for its commitment to safety and environmental protection.", imageName: "Shimane.jpg" },
+                { lat: 52.2133333333333, lng: 1.61861111111111, description: "Sizewell-B Nuclear Power Station: The UK's only commercial pressurized water reactor, providing a significant part of the country's clean energy.", imageName: "Sizewell B.jpg" },
+                { lat: 54.1691666666667, lng: 33.2466666666667, description: "Smolensk Nuclear Power Station: Utilizes RBMK reactors, similar to those at Chernobyl, located in Russia.", imageName: "Smolensk.jpg" },
+                { lat: 28.7955555555556, lng: -96.0488888888889, description: "South Texas Nuclear Power Station: A key part of Texas' energy mix, located near Bay City, featuring two reactors.", imageName: "South Texas.jpg" },
+                { lat: 47.8166666666667, lng: 31.2166666666667, description: "South Ukraine Nuclear Power Station: An essential provider of Ukraine's electricity, demonstrating advanced nuclear technology.", imageName: "South Ukraine.jpg" },
+                { lat: 37.1655555555556, lng: -76.6977777777778, description: "Surry Nuclear Power Station: Supplies power to large parts of Virginia, known for its safety record and environmental initiatives.", imageName: "Surry.jpg" },
+                { lat: 41.0888888888889, lng: -76.1488888888889, description: "Susquehanna Nuclear Power Station: Provides reliable, low-cost electricity to Pennsylvania, emphasizing community and environmental stewardship.", imageName: "Susquehanna.jpg" },
+                { lat: 21.9094444444444, lng: 112.979166666667, description: "Taishan Nuclear Power Plant: Features EPR reactors, representing a significant advancement in global nuclear safety standards.", imageName: "Taishan.jpg" },
+                { lat: 35.5222222222222, lng: 135.504722222222, description: "Takahama Nuclear Power Station: A key player in Japan's energy sector, located in Fukui Prefecture, with a focus on cutting-edge safety features.", imageName: "Takahama.jpg" },
+                { lat: 19.8277777777778, lng: 72.6611111111111, description: "Tarapur Nuclear Power Station: India's first nuclear reactor and a pioneer in the country's nuclear energy development.", imageName: "Tarapur.jpg" },
+                { lat: 49.18, lng: 14.3761111111111, description: "Temelin Nuclear Power Station: A major source of electricity in the Czech Republic, noted for its two VVER reactors.", imageName: "Temelin.jpg" },
+                { lat: 34.6869444444444, lng: 119.459722222222, description: "Tianwan Nuclear Power Station: Part of China's large-scale expansion of nuclear power, located in Jiangsu province.", imageName: "Tianwan.jpg" },
+                { lat: 50.5347222222222, lng: 5.2725, description: "Tihange Nuclear Power Station: Critical for Belgium's electricity supply, it's known for its rigorous safety protocols.", imageName: "Tihange.jpg" },
+                { lat: 36.4663888888889, lng: 140.606666666667, description: "Tokai Nuclear Power Station: Japan's first commercial nuclear power plant, marking a significant step in the country's energy history.", imageName: "Tokai.jpg" },
+                { lat: 43.0361111111111, lng: 140.5125, description: "Tomari Nuclear Power Station: Located in Hokkaido, Japan, it contributes significantly to the region's energy stability.", imageName: "Tomari.jpg" },
+                { lat: 55.9680555555556, lng: -2.40916666666667, description: "Torness Nuclear Power Station: Supplies electricity to Scotland, showcasing advanced gas-cooled reactor technology.", imageName: "Torness.jpg" },
+                { lat: 44.3297222222222, lng: 4.73222222222222, description: "Tricastin Nuclear Power Station: A key part of France's nuclear energy sector, located in Drôme and Vaucluse.", imageName: "Tricastin.jpg" },
+                { lat: 40.7011111111111, lng: -2.62194444444444, description: "Trillo Nuclear Power Station: Provides power to Spain, emphasizing safety and environmental sustainability.", imageName: "Trillo.jpg" },
+                { lat: 35.6727777777778, lng: 136.077222222222, description: "Tsuruga Nuclear Power Station: Known for its history and contribution to Japan's energy sector, located in Fukui Prefecture.", imageName: "Tsuruga.jpg" },
+                { lat: 25.4341666666667, lng: -80.3305555555555, description: "Turkey Point Nuclear Generating Station: Situated near Miami, Florida, this plant plays a crucial role in powering the southeastern United States.", imageName: "Turkey Point.jpg" },
+                { lat: 40.9513888888889, lng: 0.866666666666667, description: "Vandellos Nuclear Power Station: A significant part of Spain's nuclear energy production, located in Catalonia.", imageName: "Vandellos.jpg" },
+                { lat: 34.2986111111111, lng: -81.3147222222222, description: "Virgil C. Summer Nuclear Generating Station", imageName: "Virgil C. Summer.jpg" },
+                { lat: 33.1430555555556, lng: -81.7658333333333, description: "Vogtle Nuclear Power Station: Embodies the future of nuclear power in the United States, with new reactors under construction in Georgia.", imageName: "Vogtle.jpg" },
                 { lat: 29.9952777777778, lng: -90.4711111111111, description: "Waterford Nuclear Power Station: A critical energy provider for Louisiana, showcasing high safety and performance standards." },
-                { lat: 35.6027777777778, lng: -84.7894444444444, description: "Watts Bar Nuclear Generating Station: Holds the title for the last nuclear reactor to begin operation in the 20th century in the United States, located in Tennessee." },
+                { lat: 35.6027777777778, lng: -84.7894444444444, description: "Watts Bar Nuclear Generating Station: Holds the title for the last nuclear reactor to begin operation in the 20th century in the United States, located in Tennessee.", imageName: "Watts Bar.jpg" },
                 { lat: 38.2388888888889, lng: -95.6888888888889, description: "Wolf Creek Power Station: A key power source for Kansas, it's known for its operational excellence and community involvement." },
-                { lat: 35.7111111111111, lng: 129.475, description: "Wolseong Nuclear Power Station: South Korea's commitment to clean and efficient nuclear energy, located in Gyeongju." },
-                { lat: 21.7097222222222, lng: 112.260555555556, description: "Yangjiang Nuclear Power Plant: A modern and significant part of China's nuclear power expansion, located in Guangdong Province." },
-                { lat: 47.5122222222222, lng: 34.5858333333333, description: "Zaporizhzhia Nuclear Power Plant: Europe's largest nuclear power station, playing a crucial role in Ukraine's energy independence." },
+                { lat: 35.7111111111111, lng: 129.475, description: "Wolseong Nuclear Power Station: South Korea's commitment to clean and efficient nuclear energy, located in Gyeongju.", imageName: "Wolseong.jpg" },
+                { lat: 21.7097222222222, lng: 112.260555555556, description: "Yangjiang Nuclear Power Plant: A modern and significant part of China's nuclear power expansion, located in Guangdong Province.", imageName: "Yangjiang.jpg" },
+                { lat: 47.5122222222222, lng: 34.5858333333333, description: "Zaporizhzhia Nuclear Power Plant: Europe's largest nuclear power station, playing a crucial role in Ukraine's energy independence.", imageName: "Zaporizhzhia.jpg" },
 
 
                 //shut down
-                { lat: 55.7444444444444, lng: 12.9208333333333, description: "Barsebäck Nuclear Power Station: Once a cornerstone of Sweden's nuclear power, now shut down as part of the country's nuclear phase-out policy." },
-                { lat: 49.71, lng: 8.41527777777778, description: "Biblis Nuclear Power Station: A former pillar of Germany's nuclear energy, shut down following the country's decision to phase out nuclear power." },
-                { lat: 53.8508333333333, lng: 9.34472222222222, description: "Brokdorf Nuclear Power Station: Recently decommissioned as part of Germany's energy transition away from nuclear power." },
-                { lat: 45.0722222222222, lng: 9.87222222222222, description: "Caorso Nuclear Power Plant." },
-                { lat: 25.2861111111111, lng: 121.5875, description: "Chin Shan Nuclear Power Plant: Taiwan's first nuclear power plant, now shut down as part of the island's nuclear energy policy shift." },
-                { lat: 51.3894444444444, lng: 30.0991666666667, description: "Chernobyl Nuclear Power Plant: Site of the 1986 disaster, serving as a stark reminder of the potential risks of nuclear power." },
-                { lat: 50.9138888888889, lng: 0.963888888888889, description: "Dungeness Nuclear Power Station: A key part of the UK's nuclear history, recently shut down after decades of service." },
-                { lat: 52.4741666666667, lng: 7.31777777777778, description: "Emsland Nuclear Power Station: Part of Germany's now diminishing nuclear energy production, slated for shutdown." },
-                { lat: 45.1841666666667, lng: 8.2775, description: "Enrico Fermi Nuclear Power Plant." },
-                { lat: 47.9030555555556, lng: 7.56305555555556, description: "Fessenheim Nuclear Power Plant: France's oldest nuclear power plant until its decommissioning in 2020, marking the beginning of a nuclear phase-out strategy." },
-                { lat: 41.5202777777778, lng: -96.0772222222222, description: "Fort Calhoun Nuclear Generating Station: Once the smallest nuclear power plant in the United States, shut down in 2016 as part of a wider shift in energy strategies." },
-                { lat: 37.4213888888889, lng: 141.0325, description: "Fukushima Daiichi Nuclear Power Station: Scene of the 2011 nuclear disaster following a massive earthquake and tsunami, leading to a reassessment of nuclear safety worldwide." },
-                { lat: 37.3194444444444, lng: 141.021111111111, description: "Fukushima Daini Nuclear Power Plant: Also affected by the 2011 disaster, it has remained shut down since, with decommissioning plans underway." },
-                { lat: 41.2583333333333, lng: 13.8347222222222, description: "Garigliano Nuclear Power Plant." },
-                { lat: 46.3958333333333, lng: -72.3569444444444, description: "Gentilly Nuclear Generating Station: Decommissioned as part of Quebec's move away from nuclear power, reflecting broader environmental and safety concerns." },
-                { lat: 49.9838888888889, lng: 10.1847222222222, description: "Grafenrheinfeld Nuclear Power Station: Ceased operations in 2015, part of Germany's commitment to end nuclear energy production by 2022." },
-                { lat: 54.1405555555556, lng: 13.6644444444444, description: "Greifswald Nuclear Power Plant: East Germany's former nuclear power station, shut down following German reunification and the subsequent reassessment of Soviet-built nuclear facilities." },
-                { lat: 52.0352777777778, lng: 9.41333333333333, description: "Grohnde Nuclear Power Station: Another of Germany's nuclear power plants scheduled for shutdown in accordance with the country's energy transition policy." },
-                { lat: 48.5147222222222, lng: 10.4022222222222, description: "Gundremmingen Nuclear Power Station: Home to one of the last boiling water reactors in Germany before its final shutdown, marking the end of an era in German nuclear power." },
-                { lat: 51.2087388888889, lng: -3.13374166666667, description: "Hinkley Point A nuclear power station." },
-                { lat: 51.209, lng: -3.128, description: "Hinkley Point B nuclear power station." },
-                { lat: 55.722, lng: -4.89, description: "Hunterston B nuclear power station." },
-                { lat: 55.6044444444444, lng: 26.56, description: "Ignalina Nuclear Power Station: Lithuania's former nuclear powerhouse, shut down as part of the country's EU accession agreement, known for its RBMK reactors similar to Chernobyl." },
-                { lat: 41.2697222222222, lng: -73.9522222222222, description: "Indian Point Energy Center: Recently decommissioned, this plant was a critical supplier of electricity to New York City and its surrounding areas." },
-                { lat: 48.6055555555556, lng: 12.2930555555556, description: "Isar Nuclear Power Station: Part of Bavaria's energy landscape for decades, now phased out as Germany transitions to renewable energy sources." },
-                { lat: 53.41, lng: 10.4088888888889, description: "Krummel Nuclear Power Station: Characterized by its distinctive twin cooling towers, it's another component of Germany's phased nuclear shutdown." },
-                { lat: 41.4252777777778, lng: 12.8069444444444, description: "Latina Nuclear Power Plant." },
-                { lat: 50.4080555555556, lng: 7.49, description: "Mülheim-Kärlich Nuclear Power Plant: A German reactor that was shut down shortly after it started operating due to concerns over seismic risk and other safety issues." },
-                { lat: 49.0416666666667, lng: 9.175, description: "Neckarwestheim Nuclear Power Station: Has played a key role in Germany's nuclear energy production, with its first unit already decommissioned and the second slated for shutdown as part of the nuclear phase-out." },
-                { lat: 42.3227777777778, lng: -86.3144444444444, description: "Palisades Nuclear Generating Station: Located in Michigan, USA, it has been a controversial subject due to safety concerns and is slated for decommissioning." },
-                { lat: 49.2525, lng: 8.43638888888889, description: "Philippsburg Nuclear Power Station: Its cooling towers were a landmark of the region until its decommissioning in 2019 as part of Germany's energy transition." },
-                { lat: 41.945, lng: -70.5783333333333, description: "Pilgrim Nuclear Power Station: Provided electricity to Massachusetts for many years before its decommissioning in 2019, reflecting changing attitudes towards nuclear power in the United States." },
-                { lat: 40.1538888888889, lng: -76.7247222222222, description: "Three Mile Island Nuclear Generating Station: Site of the most significant accident in U.S. commercial nuclear power plant history in 1979, leading to widespread changes in nuclear power regulation." },
-                { lat: 33.3688888888889, lng: -117.555, description: "San Onofre Nuclear Power Station: Its distinctive twin domes were a familiar sight on the Southern California coast until decommissioning began in 2013 after a series of technical problems." },
-                { lat: 42.7753, lng: -3.20729166666667, description: "Santa María de Garoña Nuclear Power Plant: Spain's oldest nuclear reactor, shut down as part of the country's commitment to renewable energy sources." },
-                { lat: 45.7583333333333, lng: 5.47222222222222, description: "Superphénix: Once the world's largest fast breeder reactor, located in France, it was shut down due to technical and political challenges, marking the end of the fast breeder program in France." },
-                { lat: 46.0383333333333, lng: -122.885, description: "Trojan Nuclear Power Plant: Once a symbol of Oregon's energy production, it was the first commercial nuclear power plant to be decommissioned in the United States." },
-                { lat: 53.4277777777778, lng: 8.48027777777778, description: "Unterweser Nuclear Power Station: Part of Germany's fleet of nuclear reactors, now shut down as the country moves towards a sustainable energy future." },
-                { lat: 42.4463888888889, lng: -87.8030555555556, description: "Zion Nuclear Power Station: Located near Chicago, Illinois, it was permanently shut down in the late 1990s, with decommissioning still ongoing." },
+                { lat: 55.7444444444444, lng: 12.9208333333333, description: "Barsebäck Nuclear Power Station: Once a cornerstone of Sweden's nuclear power, now shut down as part of the country's nuclear phase-out policy.", imageName: "Barsebäck.jpg" },
+                { lat: 49.71, lng: 8.41527777777778, description: "Biblis Nuclear Power Station: A former pillar of Germany's nuclear energy, shut down following the country's decision to phase out nuclear power.", imageName: "Biblis.jpg" },
+                { lat: 53.8508333333333, lng: 9.34472222222222, description: "Brokdorf Nuclear Power Station: Recently decommissioned as part of Germany's energy transition away from nuclear power.", imageName: "Brokdorf.jpg" },
+                { lat: 45.0722222222222, lng: 9.87222222222222, description: "Caorso Nuclear Power Plant.", imageName: "Caorso.jpg" },
+                { lat: 25.2861111111111, lng: 121.5875, description: "Chin Shan Nuclear Power Plant: Taiwan's first nuclear power plant, now shut down as part of the island's nuclear energy policy shift.", imageName: "Chin Shan.jpg" },
+                { lat: 51.3894444444444, lng: 30.0991666666667, description: "Chernobyl Nuclear Power Plant: Site of the 1986 disaster, serving as a stark reminder of the potential risks of nuclear power.", imageName: "Chernobyl.jpg" },
+                { lat: 50.9138888888889, lng: 0.963888888888889, description: "Dungeness Nuclear Power Station: A key part of the UK's nuclear history, recently shut down after decades of service.", imageName: "Dungeness.jpg" },
+                { lat: 52.4741666666667, lng: 7.31777777777778, description: "Emsland Nuclear Power Station: Part of Germany's now diminishing nuclear energy production, slated for shutdown.", imageName: "Emsland.jpg" },
+                { lat: 45.1841666666667, lng: 8.2775, description: "Enrico Fermi Nuclear Power Plant in Italy.", imageName: "Enrico Fermi Italy.jpg" },
+                { lat: 47.9030555555556, lng: 7.56305555555556, description: "Fessenheim Nuclear Power Plant: France's oldest nuclear power plant until its decommissioning in 2020, marking the beginning of a nuclear phase-out strategy.", imageName: "Fessenheim.jpg" },
+                { lat: 41.5202777777778, lng: -96.0772222222222, description: "Fort Calhoun Nuclear Generating Station: Once the smallest nuclear power plant in the United States, shut down in 2016 as part of a wider shift in energy strategies.", imageName: "Fort Calhoun.jpg" },
+                { lat: 37.4213888888889, lng: 141.0325, description: "Fukushima Daiichi Nuclear Power Station: Scene of the 2011 nuclear disaster following a massive earthquake and tsunami, leading to a reassessment of nuclear safety worldwide.", imageName: "Fukushima Daiichi.jpg" },
+                { lat: 37.3194444444444, lng: 141.021111111111, description: "Fukushima Daini Nuclear Power Plant: Also affected by the 2011 disaster, it has remained shut down since, with decommissioning plans underway.", imageName: "Fukushima Daini.jpg" },
+                { lat: 41.2583333333333, lng: 13.8347222222222, description: "Garigliano Nuclear Power Plant.", imageName: "Garigliano.jpg" },
+                { lat: 46.3958333333333, lng: -72.3569444444444, description: "Gentilly Nuclear Generating Station: Decommissioned as part of Quebec's move away from nuclear power, reflecting broader environmental and safety concerns.", imageName: "Gentilly.jpg" },
+                { lat: 49.9838888888889, lng: 10.1847222222222, description: "Grafenrheinfeld Nuclear Power Station: Ceased operations in 2015, part of Germany's commitment to end nuclear energy production by 2022.", imageName: "Grafenrheinfeld.jpg" },
+                { lat: 54.1405555555556, lng: 13.6644444444444, description: "Greifswald Nuclear Power Plant: East Germany's former nuclear power station, shut down following German reunification and the subsequent reassessment of Soviet-built nuclear facilities.", imageName: "Greifswald.jpg" },
+                { lat: 52.0352777777778, lng: 9.41333333333333, description: "Grohnde Nuclear Power Station: Another of Germany's nuclear power plants scheduled for shutdown in accordance with the country's energy transition policy.", imageName: "Grohnde.jpg" },
+                { lat: 48.5147222222222, lng: 10.4022222222222, description: "Gundremmingen Nuclear Power Station: Home to one of the last boiling water reactors in Germany before its final shutdown, marking the end of an era in German nuclear power.", imageName: "Gundremmingen.jpg" },
+                { lat: 51.2087388888889, lng: -3.13374166666667, description: "Hinkley Point A nuclear power station.", imageName: "Hinkley Point A.jpg" },
+                { lat: 51.209, lng: -3.128, description: "Hinkley Point B nuclear power station.", imageName: "Hinkley Point B.jpg" },
+                { lat: 55.722, lng: -4.89, description: "Hunterston B nuclear power station.", imageName: "Hunterston B.jpg" },
+                { lat: 55.6044444444444, lng: 26.56, description: "Ignalina Nuclear Power Station: Lithuania's former nuclear powerhouse, shut down as part of the country's EU accession agreement, known for its RBMK reactors similar to Chernobyl.", imageName: "Ignalina.jpeg" },
+                { lat: 41.2697222222222, lng: -73.9522222222222, description: "Indian Point Energy Center: Recently decommissioned, this plant was a critical supplier of electricity to New York City and its surrounding areas.", imageName: "Indian Point.jpg" },
+                { lat: 48.6055555555556, lng: 12.2930555555556, description: "Isar Nuclear Power Station: Part of Bavaria's energy landscape for decades, now phased out as Germany transitions to renewable energy sources.", imageName: "Isar.jpg" },
+                { lat: 53.41, lng: 10.4088888888889, description: "Krummel Nuclear Power Station: Characterized by its distinctive twin cooling towers, it's another component of Germany's phased nuclear shutdown.", imageName: "Krummel.jpg" },
+                { lat: 41.4252777777778, lng: 12.8069444444444, description: "Latina Nuclear Power Plant.", imageName: "Latina.jpg" },
+                { lat: 50.4080555555556, lng: 7.49, description: "Mülheim-Kärlich Nuclear Power Plant: A German reactor that was shut down shortly after it started operating due to concerns over seismic risk and other safety issues.", imageName: "Mülheim-Kärlich.jpg" },
+                { lat: 49.0416666666667, lng: 9.175, description: "Neckarwestheim Nuclear Power Station: Has played a key role in Germany's nuclear energy production, with its first unit already decommissioned and the second slated for shutdown as part of the nuclear phase-out.", imageName: "Neckarwestheim.jpg" },
+                { lat: 42.3227777777778, lng: -86.3144444444444, description: "Palisades Nuclear Generating Station: Located in Michigan, USA, it has been a controversial subject due to safety concerns and is slated for decommissioning.", imageName: "Palisades.jpg" },
+                { lat: 49.2525, lng: 8.43638888888889, description: "Philippsburg Nuclear Power Station: Its cooling towers were a landmark of the region until its decommissioning in 2019 as part of Germany's energy transition.", imageName: "Philippsburg.jpg" },
+                { lat: 41.945, lng: -70.5783333333333, description: "Pilgrim Nuclear Power Station: Provided electricity to Massachusetts for many years before its decommissioning in 2019, reflecting changing attitudes towards nuclear power in the United States.", imageName: "Pilgrim.jpg" },
+                { lat: 40.1538888888889, lng: -76.7247222222222, description: "Three Mile Island Nuclear Generating Station: Site of the most significant accident in U.S. commercial nuclear power plant history in 1979, leading to widespread changes in nuclear power regulation.", imageName: "Three Mile Island.jpg" },
+                { lat: 33.3688888888889, lng: -117.555, description: "San Onofre Nuclear Power Station: Its distinctive twin domes were a familiar sight on the Southern California coast until decommissioning began in 2013 after a series of technical problems.", imageName: "San Onofre.jpg" },
+                { lat: 42.7753, lng: -3.20729166666667, description: "Santa María de Garoña Nuclear Power Plant: Spain's oldest nuclear reactor, shut down as part of the country's commitment to renewable energy sources.", imageName: "Santa María de Garoña.jpg" },
+                { lat: 45.7583333333333, lng: 5.47222222222222, description: "Superphénix: Once the world's largest fast breeder reactor, located in France, it was shut down due to technical and political challenges, marking the end of the fast breeder program in France.", imageName: "Superphénix.jpg" },
+                { lat: 46.0383333333333, lng: -122.885, description: "Trojan Nuclear Power Plant: Once a symbol of Oregon's energy production, it was the first commercial nuclear power plant to be decommissioned in the United States.", imageName: "Trojan.jpg" },
+                { lat: 53.4277777777778, lng: 8.48027777777778, description: "Unterweser Nuclear Power Station: Part of Germany's fleet of nuclear reactors, now shut down as the country moves towards a sustainable energy future.", imageName: "Unterweser.jpg" },
+                { lat: 42.4463888888889, lng: -87.8030555555556, description: "Zion Nuclear Power Station: Located near Chicago, Illinois, it was permanently shut down in the late 1990s, with decommissioning still ongoing.", imageName: "Zion.jpg" },
                 // Under Construction
-                { lat: 36.1444444444444, lng: 33.5411111111111, description: "Akkuyu Nuclear Power Plant: Signifies Turkey's entry into the nuclear energy field, with expectations to meet a significant portion of the country's energy demands." },
-                { lat: 31.0441666666667, lng: 28.4977777777778, description: "GEl Dabaa Nuclear Power Plant, marking progress in nuclear technology and infrastructure development." },
-                { lat: 51.2061111111111, lng: -3.14388888888889, description: "Hinkley Point C Nuclear Power Plant: Set to be the United Kingdom's first new nuclear power station in over 20 years, representing a major investment in the UK's energy security." },
-                { lat: 41.5097222222222, lng: 140.910277777778, description: "Ōma Nuclear Power Plant: A groundbreaking project in Japan, designed to be fully MOX-fueled, reflecting advances in fuel technology and reactor safety." },
-                { lat: 24.0666666666667, lng: 89.0472222222222, description: "Rooppur Nuclear Power Plant: Bangladesh's first venture into nuclear power, expected to significantly contribute to the country's energy independence." },
+                { lat: 31.0441666666667, lng: 28.4977777777778, description: "El Dabaa Nuclear Power Plant, marking progress in nuclear technology and infrastructure development." },
+                { lat: 51.2061111111111, lng: -3.14388888888889, description: "Hinkley Point C Nuclear Power Plant: Set to be the United Kingdom's first new nuclear power station in over 20 years, representing a major investment in the UK's energy security.", imageName: "Hinkley Point C.jpg" },
+                { lat: 41.5097222222222, lng: 140.910277777778, description: "Ōma Nuclear Power Plant: A groundbreaking project in Japan, designed to be fully MOX-fueled, reflecting advances in fuel technology and reactor safety.", imageName: "Ōma.jpg" },
+                { lat: 24.0666666666667, lng: 89.0472222222222, description: "Rooppur Nuclear Power Plant: Bangladesh's first venture into nuclear power, expected to significantly contribute to the country's energy independence.", imageName: "Rooppur.jpg" },
                 { lat: 27.2013888888889, lng: 120.515555555556, description: "San’ao Nuclear Power Plant under construction, aimed at bolstering energy production capabilities with modern safety and efficiency standards." },
                 { lat: 40.3513888888889, lng: 120.546388888889, description: "Xudabao Nuclear Power Plant under construction, part of a strategic initiative to expand nuclear energy infrastructure and meet future power needs." },
                 { lat: 23.8291666666667, lng: 117.491666666667, description: "Zhangzhou Nuclear Power Plant under construction, representing advancements in nuclear technology and a commitment to sustainable energy sources." },
@@ -300,8 +316,27 @@
                     // Close previously opened InfoWindow
                     infoWindow.close();
 
+                    //fetch the name of the power plant from the description
+                    let name = location.description.includes(":") ? location.description.split(":")[0] : location.description;
+
+                    fetch(`/scrape_news_map?name=${encodeURIComponent(name)}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data.headlines);
+                            console.log(data.links);
+                            updateNewsDisplay(data.headlines, data.links);
+                        })
+                        .catch(error => console.error('Error fetching news:', error));
+
                     // Set new content (using the description property) and open InfoWindow on the clicked marker
-                    infoWindow.setContent(location.description);
+                    if(location.imageName){
+                        const imagePath = '/static/nuclear power plant images/' + encodeURIComponent(location.imageName);
+                        infoWindow.setContent('<div><strong>' + location.description + '</strong><br><img src="' + imagePath + '" alt="Image of ' + location.description + '" style="width:500px;"></div>');
+                    }else{
+                        infoWindow.setContent(location.description);
+                    }
+
+
                     infoWindow.open(map, marker);
                 });
 
@@ -313,9 +348,24 @@
                 imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
             });
 
+            //update the news everytime when a marker is clicked
+            function updateNewsDisplay(headlines, links) {
+                const displayElement = document.getElementById('newsDisplay');
+                displayElement.innerHTML = ''; // Clear previous content
+                headlines.forEach((headline, index) => {
+                    const link = document.createElement('a');
+                    link.href = links[index];
+                    link.textContent = headline;
+                    link.target = '_blank';
+                    displayElement.appendChild(link);
+                    displayElement.appendChild(document.createElement('br'));
 
+                });
+            }
         }
     </script>
+
+
     <style>
         /* Always set the map height explicitly to define the size of the div element that contains the map. */
         #map {
@@ -331,12 +381,13 @@
             padding: 10px;
             cursor: pointer;
         }
+        #newsDisplay {
+            margin-top: 50px;
+        }
     </style>
-</head>
-<body>
-    <h1>Welcome to Wastewater Watching</h1>
-    <p>Here is the map!</p>
-    <div id="map"></div>
 </body>
+
+
+
 </html>
 {% endblock %}
