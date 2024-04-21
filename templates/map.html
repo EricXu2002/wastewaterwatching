@@ -14,8 +14,7 @@
     <h1>Welcome to Wastewater Watching</h1>
     <p>Here is the map!</p>
     <div id="map"></div>
-    <div id="map" style="height: 400px;"></div>
-    <div id="newsDisplay" style="padding: 20px;">
+    <div id="newsDisplay">
         <h2>News For the Nuclear Power Plant You Clicked</h2>
     </div>
 </body>
@@ -75,7 +74,7 @@
                 infoWindow.open(map);
             }
 
-            // Nuclear power plant makers
+            // Nuclear power plant makers with description and images
             const locations = [
                 //Source: https://en.wikipedia.org/wiki/List_of_nuclear_power_stations#cite_ref-tai_45-1
 
@@ -331,11 +330,10 @@
                     // Set new content (using the description property) and open InfoWindow on the clicked marker
                     if(location.imageName){
                         const imagePath = '/static/nuclear power plant images/' + encodeURIComponent(location.imageName);
-                        infoWindow.setContent('<div><strong>' + location.description + '</strong><br><img src="' + imagePath + '" alt="Image of ' + location.description + '" style="width:500px;"></div>');
+                        infoWindow.setContent('<div><strong>' + location.description + '</strong><br><img src="' + imagePath + '" alt="Image of ' + location.description + '" style="width:300px;"></div>');
                     }else{
                         infoWindow.setContent(location.description);
                     }
-
 
                     infoWindow.open(map, marker);
                 });
@@ -370,7 +368,9 @@
         /* Always set the map height explicitly to define the size of the div element that contains the map. */
         #map {
             height: 600px;
-            width: 1000px;
+            width: 100%;
+            margin: 0; /* Remove any default margin */
+            padding: 0; /* Remove any default padding */
         }
         .custom-map-control-button {
             background-color: #fff;
@@ -382,7 +382,11 @@
             cursor: pointer;
         }
         #newsDisplay {
-            margin-top: 50px;
+        margin-top: 20px;
+        font-size: 24px; /* Adjusted font size */
+        padding: 20px;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
     </style>
 </body>
