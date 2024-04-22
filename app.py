@@ -128,9 +128,22 @@ def news():
     links += links2
     return render_template('news.html', headlines=headlines, links=links)
 
-@app.route('/forum', methods=["GET", "POST"])
-@login_required
+@app.route('/forum', methods=["GET"])
+# @login_required
 def forum():
+
+    curr_name = 'Guest'
+
+    if current_user.is_authenticated:
+        curr_name = current_user.name
+            
+    topics = db.session.execute(db.select(Topic)).scalars()
+
+    return render_template('forum/index.html', topics=topics, name=curr_name)
+
+@app.route('/forum/newtopic', methods=["GET","POST"])
+@login_required
+def new_topic():
     if request.method == "POST":
         topic = Topic(
             title=request.form["title"],
@@ -139,14 +152,25 @@ def forum():
         )
         db.session.add(topic)
         db.session.commit()
-        
-    topics = db.session.execute(db.select(Topic)).scalars()
-
-    return render_template('forum/index.html', topics=topics, name=current_user.name)
+    
+    return render_template('forum/newtopic.html', name=current_user.name)
 
 @app.route('/forum/topic/<int:id>', methods=["GET", "POST"])
-@login_required
+# @login_required
 def topic(id):
+
+    curr_name = 'Guest'
+
+    if current_user.is_authenticated:
+        curr_name = current_user.name
+    
+    topic = db.get_or_404(Topic, id)
+    comments = Comment.query.filter_by(topicId=id).all()
+    return render_template('forum/topic.html', topic=topic, comments=comments, name=curr_name)
+
+@app.route('/forum/topic/<int:id>/newcomment', methods=["GET","POST"])
+@login_required
+def new_comment(id):
     if request.method == "POST":
         comment = Comment(
             text=request.form["text"],
@@ -158,12 +182,11 @@ def topic(id):
     
     topic = db.get_or_404(Topic, id)
     comments = Comment.query.filter_by(topicId=id).all()
-    return render_template('forum/topic.html', topic=topic, comments=comments, name=current_user.name)
+    return render_template('forum/newcomment.html', topic=topic, comments=comments, name=current_user.name)
 
 @app.route('/login')
 def login():
     if current_user.is_authenticated:
-        flash("You are already logged in.")
         return redirect(url_for('index'))
     
     return render_template('login.html')
