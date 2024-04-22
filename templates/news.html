@@ -4,11 +4,15 @@
     <p></p>
     <head>
         <meta charset="UTF-8">
+        <div class="header">
+            <h1>NEWS</h1>
+            <p>Latest Radiation Updates</p>
+
+        </div>
         <title>News Headlines</title>
     </head>
     <body>
-        <h1 style="text-align:center">Latest News Headlines</h1>
-        <hr>
+        <p>&nbsp;</p>
         <ul>
             {% for i in range(headlines|length) %}
                 <h2 style="font-size:large;"><a href="{{links[i]}}">{{ headlines[i] }}</a></h2>

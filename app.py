@@ -16,8 +16,20 @@ def scrapeNewsForPlant(name):
     links=[]
     for headline in soup.find_all('h3'):
         headlines.append(headline.text)
-        links.append(headline.get("href"))
-        print(headline.get("href"))
+        #links.append(headline.get("href"))
+        #print(headline.get("href"))
+    soup = BeautifulSoup(response.content, "html.parser")
+    for item in soup.select('a', jsname_=".YKoRaf", class_='.WlydOe', href = True):
+        link = item.get("href")
+        if(link[0:7] == "/url?q="):
+            end = link.find("&sa")
+            if(end != -1):
+                links.append(link[7:end])
+                print(item["href"][7:end])
+    links.pop(0)
+    links.pop(0)
+    links.pop()
+    links.pop()
     return headlines, links
     
 
