@@ -1,10 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 from flask_login import UserMixin, LoginManager, login_user, login_required, current_user, logout_user
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, app, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from flask_cors import CORS
 from sqlalchemy import Integer, String
 
 def scrapeNewsForPlant(name):
@@ -40,6 +41,13 @@ def scrape_news():
 
 
 app = Flask(__name__)
+CORS(app)
+
+@app.route('/scrape_news_map', methods=['GET'])
+def scrape_news_map():
+    plant_name = request.args.get('name')
+    headlines, links = scrapeNewsForPlant(plant_name)
+    return jsonify({'headlines': headlines, 'links': links})
 
 # SQLAlchemy and DB setup
 
