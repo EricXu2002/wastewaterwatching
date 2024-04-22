@@ -327,7 +327,7 @@
                         })
                         .catch(error => console.error('Error fetching news:', error));
 
-                    // Set new content (using the description property) and open InfoWindow on the clicked marker
+                    // Set news content (using the description property) and open InfoWindow on the clicked marker
                     if(location.imageName){
                         const imagePath = '/static/nuclear power plant images/' + encodeURIComponent(location.imageName);
                         infoWindow.setContent('<div><strong>' + location.description + '</strong><br><img src="' + imagePath + '" alt="Image of ' + location.description + '" style="width:300px;"></div>');
