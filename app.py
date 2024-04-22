@@ -172,6 +172,7 @@ def topic(id):
 @login_required
 def new_comment(id):
     if request.method == "POST":
+        print(request.form)
         comment = Comment(
             text=request.form["text"],
             topicId=id,

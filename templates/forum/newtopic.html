@@ -2,13 +2,13 @@
 
 {% block content %}
 
-    <h1>{% block title %} Welcome {{ name }} {% endblock %}</h1>
+    <h2>{% block title %} Welcome {{ name }} {% endblock %}</h2>
 
     <div class="container">
 
         <h2>Add a Topic</h2>
         
-        <form action="/forum" method="post">
+        <form action="/forum/newtopic" method="post">
             <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input type="text" name="title" class="form-control" id="title" aria-describedby="emailHelp">

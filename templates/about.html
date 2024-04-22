@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Welcome to Wastewater Watching {% endblock %}</h1>
+    <head>
+        <meta charset="UTF-8">
+        <div class="header">
+            <h1>ABOUT</h1>
+            <p>The WWW Team</p>
+
+        </div>
+        <title>About Us</title>
+    </head>
+
     <p>We are Wastewater Watching, a group dedicated to tracking nuclear wastewater disposal around the world.</p>
-    <img src="{{url_for('static', filename='images/ethandon.jpeg')}}" alt="Ethan Don headshot." style="width:30%">
-    <img src="{{url_for('static', filename='images/maxshi.jpeg')}}" alt="Max Shi headshot." style="width:30%">
-    <img src="{{url_for('static', filename='images/ericxu.jpeg')}}" alt="Eric Xu headshot." style="width:30%">
+    <img src="{{url_for('static', filename='images/ethandon.jpeg')}}" alt="Ethan Don headshot." style="width:33%">
+    <img src="{{url_for('static', filename='images/maxshi.jpeg')}}" alt="Max Shi headshot." style="width:33%">
+    <img src="{{url_for('static', filename='images/ericxu.jpeg')}}" alt="Eric Xu headshot." style="width:33%">
 {% endblock %}
